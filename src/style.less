@@ -1,0 +1,346 @@
+html {
+  font-size: 100px;
+}
+:root {
+  height: 100vh;
+  /* font-family: Inter, Avenir, Helvetica, Arial, sans-serif; */
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 5px;
+  cursor: pointer;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #78d4fd;
+  cursor: pointer;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  /* display: flex;
+  place-items: center; */
+  min-width: 320px;
+  min-height: 100vh;
+  width: auto !important;
+  overflow: hidden;
+}
+
+#app {
+  margin: 0 auto;
+  width: 100%;
+  height: 100vh;
+}
+
+.el-message__icon {
+  width: .2rem !important;
+  height: .2rem !important;
+}
+
+.map-rotate-controller {
+  position: absolute;
+  right: 35vw;
+  top: 0;
+  scale: 0.6;
+  transform-origin: top;
+}
+
+.right-toolbar-container {
+  position: relative;
+  min-width: 3.9rem;
+  overflow-y: scroll;
+  height: 9rem;
+}
+
+.map-tools-container {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.map-info-window {
+  position: relative;
+  min-width: 3rem;
+  background: linear-gradient(270deg, #095a9df3 0%, #0e416bee 100%);
+  font-size: 0.14rem;
+  font-family: Han Sans CN-Regular, Han Sans CN;
+  font-weight: 400;
+  text-align: start;
+  color: #f5f7fe;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px solid #53c2f2e1;
+  z-index: 99;
+  text-align: start;
+  box-sizing: border-box;
+  box-shadow: 0 0 0 1px #39819e, inset 0 0 0 1px #3d8fb3;
+  transition: max-width 1000ms ease-out;
+
+  &::after {
+    content: "";
+    z-index: 9;
+    width: 52px;
+    height: 144px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: scale(0.5);
+    transform-origin: top right;
+    background: url("/src/assets/img/info-window-border.png") top right/100% 100% no-repeat;
+  }
+
+  &::before {
+    content: "";
+    z-index: 9;
+    width: 51px;
+    height: 58px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: scale(0.5);
+    transform-origin: bottom left;
+    background: url("/src/assets/img/info-window-border2.png") bottom left/100% 100% no-repeat;
+  }
+
+  .arrow {
+    height: .15rem;
+    width: .15rem;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    z-index: 1;
+    background-color: #0d4b82;
+    transform: translate(-50%,50%) rotate(45deg);
+    border-right: 2px solid #53c2f2e1;
+    border-bottom: 2px solid #53c2f2e1;
+  }
+  
+}
+.info-window-title {
+  font-size: 0.14rem;
+  font-weight: 700;
+  height: 0.38rem;
+  background: linear-gradient(90deg, #046cb2e7 0%, #0a5a9cb4 100%);
+  display: flex;
+  align-items: center;
+  padding-left: 0.1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.info-window-content {
+  padding: 0.12rem 0.2rem 0.15rem 0.15rem;
+}
+
+.tags {
+  &:not(&:first-child){
+    margin-top: .1rem;
+  }
+  & > span {
+    padding: 0.03rem 0.08rem;
+    font-size: 0.12rem;
+    margin-right: 0.05rem;
+    border-radius: 0.05rem;
+    color: #fff;
+  }
+
+  .tags-green {
+    background: #30d65c;
+  }
+
+  .tags-blue {
+    background: #306cf5;
+  }
+
+  .tags-red {
+    background: #ef4926;
+  }
+
+  .tags-orange {
+    background: #f7a973;
+  }
+
+  .tags-pink {
+    background: #fc628b;
+  }
+
+  .tags-purple {
+    background: purple;
+  }
+}
+
+.none {
+  display: none;
+}
+
+.info-window-infos {
+  padding: 0.1rem 0 0 0.01rem;
+  font-size: 0.14rem;
+  
+  div span:first-child {
+    white-space: nowrap;color: #fff;
+  }
+
+  .number {
+    color: #fff;
+    font-size: 0.13rem;
+    font-weight: bold;
+  }
+}
+
+.epidemic-map.hidden {
+  pointer-events: none;
+  .epidemic-left-toolbar__wrapper {
+    transform: translateX(-4rem);
+  }
+  .epidemic-right-toolbar__wrapper {
+    transform: translateX(4rem);
+  }
+  .epidemic-center-toolbar__wrapper {
+    transform: translateY(-2rem);
+    opacity: 0;
+  }
+  .open-btn {
+    pointer-events: all;
+    transform: translateX(-2.74rem);
+  }
+  .epidemic-division {
+    pointer-events: all;
+    transform: translateX(-2.8rem);
+  }
+}
+.epidemic-map  {
+  .map-left-toolbar{
+    pointer-events: none;
+  }
+  .open-btn {
+    pointer-events: all;
+  }
+  .epidemic-division {
+    pointer-events: all;
+  }
+  .epidemic-left-toolbar__wrapper {
+    pointer-events: all;
+  }
+}
+
+.map-menu {
+  display: flex;
+  height: 0.33rem;
+  margin-top: 0.4rem;
+}
+.map-menu-item {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 0.15rem;
+  background: url("@/assets/img/mapMenu/btn-bg2.png") center/100% 100%;
+  margin-right: 0.05rem;
+  cursor: pointer;
+  transition: background 200ms;
+
+  &.router-link-active {
+    background-image: url("@/assets/img/mapMenu/btn-bg.png");
+    span {
+      -webkit-text-fill-color: white !important;
+      color: white !important;
+    }
+  }
+
+  img {
+    width: 0.15rem;
+    height: 0.15rem;
+    object-fit: contain;
+    margin-right: 0.08rem;
+  }
+
+  span {
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(#93cdfe 0%, #ffffff 100%);
+  }
+}
+
+// Element 修改
+.el-select-dropdown {
+  background: #012d50;
+  border: none;
+  .el-select-dropdown__item {
+    color: #fff !important;
+  }
+  .el-select-dropdown__item.hover {
+      background-color: #012d50;
+      // background-color: #1175e5;
+    &:hover {
+      background-color: #1175e5;
+      // background-color: #012d50;
+    }
+  }
+  .el-select-dropdown__item.selected {
+    background-color: #1175e5;
+  }
+}
+.el-popper {
+  border: none !important;
+}
+
+.el-select {
+  .el-input__wrapper {
+    width: 1.19rem;
+    height: .2rem;
+    font-size: .12rem;
+    background-color: #065084;
+    box-shadow: 0 0 0 1px #065084 !important;
+    &.is-focus {
+      box-shadow: none !important;
+    }
+  }
+  .el-input__inner {
+    color: #fff;
+  }
+
+  .el-input__suffix {
+    .el-input__suffix-inner {
+      .el-select__caret {
+        line-height: .2rem;
+        color: #fff;
+      }
+    }
+  }
+}
