@@ -54,7 +54,7 @@
 
 <script setup>
 import { useMapStore } from '@/stores/mapStore';
-import { computed, onMounted, ref, watch } from '@vue/runtime-core';
+import { computed, onMounted, ref, watch } from 'vue';
 import { apiGetListByExamSiteType } from '@/api/useExaminationMapRequest';
 import { ElLoading } from 'element-plus';
 import { debounce } from '@/utils/debounce';

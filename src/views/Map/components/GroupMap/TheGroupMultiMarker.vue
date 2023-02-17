@@ -3,32 +3,31 @@
     <div class="btn-content">
       <img
         src="/src/assets/img/select-icon.png"
-        @click="controlSchoolName"
+        @click="toggleNameShow"
         v-show="!showSchoolName"
       />
       <img
         src="/src/assets/img/selected-icon.png"
-        @click="controlSchoolName"
+        @click="toggleNameShow"
         v-show="showSchoolName"
       />
       <span class="name">{{
-        showSchoolName ? "隐藏学校名称" : "显示学校名称"
+        showSchoolName ? '隐藏学校名称' : '显示学校名称'
       }}</span>
     </div>
   </div>
 </template>
 
 <script>
-import { apiGetGroupSchool } from "@/api/useGroupMapRequest";
-import multiMarkerMixin from "@/mixins/multiMarkerMixin";
-import { useMapInstanceStore } from "@/stores/mapInstanceStore";
+import { apiGetGroupSchool } from '@/api/useGroupMapRequest';
+import multiMarkerMixin from '@/mixins/multiMarkerMixin';
 
 export default {
   mixins: [multiMarkerMixin],
   data() {
     return {
       municipal: true, // 标记当前是否为市属学校
-      showSchoolName: true, // 是否显示学校名
+      showSchoolName: false, // 是否显示学校名,true为显示
     };
   },
   computed: {
@@ -46,12 +45,14 @@ export default {
       }
     },
     officeType() {
-      this.showSchoolName = true;
+      // this.showSchoolName = true;
+      this.showSchoolName = false;
       this.infoWindow.close();
       this.setGroupSchoolMark();
     },
     addressId() {
-      this.showSchoolName = true;
+      // this.showSchoolName = true;
+      this.showSchoolName = false;
       this.infoWindow.close();
       this.setGroupSchoolMark();
     },
@@ -67,36 +68,34 @@ export default {
       let loading = this.$loading();
       apiGetGroupSchool(this.officeType, this.addressId)
         .then(({ result }) => {
-          this.schoolLayerSetGeometries(result);
-          this.schoolLayer.setMap(this.map);
+          // TODO: 集团地图初始化取消地图碰撞和显示学校名称，可能会改回来
+          this.schoolLayerSetGeometries(result, { content: '' });
+          this.setSchoolLayerOptions({ enableCollision: false });
         })
         .catch((err) => {
           console.error(
-            "❌ ~ file: TheGroupMultiMarker.vue:120 ~ setGroupSchoolMark ~ err",
+            '❌ ~ file: TheGroupMultiMarker.vue:120 ~ setGroupSchoolMark ~ err',
             err
           );
         })
         .finally(loading.close);
     },
-    controlSchoolName() {
+    // 控制显示隐藏学校名称
+    toggleNameShow() {
       if (!this.showSchoolName) {
-        this.schoolLayer.updateGeometries(
-          this.schoolLayer.geometries.map((item) => {
-            return {
-              ...item,
-              content: item.properties.schoolName,
-            };
-          })
-        );
+        this.schoolLayerUpdateGeometries((item) => {
+          return {
+            ...item,
+            content: item.properties.schoolName,
+          };
+        });
       } else {
-        this.schoolLayer.updateGeometries(
-          this.schoolLayer.geometries.map((item) => {
-            return {
-              ...item,
-              content: "",
-            };
-          })
-        );
+        this.schoolLayerUpdateGeometries((item) => {
+          return {
+            ...item,
+            content: '',
+          };
+        });
       }
       this.showSchoolName = !this.showSchoolName;
     },
@@ -114,7 +113,7 @@ export default {
   .btn-content {
     display: flex;
     align-items: center;
-    background: url("/src/assets/img/school-btn-bg.png");
+    background: url('/src/assets/img/school-btn-bg.png');
     background-size: 100% 100%;
     color: #fff;
     padding: 0.1rem;

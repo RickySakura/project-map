@@ -48,14 +48,16 @@ export default {
     this.setExaminationMark();
     // this.updateAreaLine();
     areaPolyLine.setMap(this.map);
-    this.examSchoolLayer.setMap(this.map);
+    // this.examSchoolLayer.setMap(this.map);
+    this.schoolLayer.setMap(this.map)
   },
   beforeUnmount() {
     areaPolyLine.setMap(null);
   },
   methods: {
     setExaminationMark() {
-      this.examSchoolLayerSetGeometries(this.schoolList);
+      // this.examSchoolLayerSetGeometries(this.schoolList);
+      this.schoolLayerSetGeometries(this.schoolList, { content: '' })
     },
     updateAreaLine() {
       Promise.all([

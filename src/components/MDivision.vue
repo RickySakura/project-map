@@ -29,7 +29,7 @@
           >
             <div class="item-index">{{ index + 1 }}</div>
             <div class="item-label">
-              {{ typeof item === "string" ? item : item.label }}
+              {{ typeof item === 'string' ? item : item.label }}
             </div>
           </li>
           <div class="no-data" v-if="activedList && activedList.length <= 0">
@@ -51,7 +51,7 @@
           >
             <div class="item-index">{{ index + 1 }}</div>
             <div class="item-label">
-              {{ typeof item === "string" ? item : item.label }}
+              {{ typeof item === 'string' ? item : item.label }}
             </div>
           </li>
           <div class="no-data" v-if="extraList && extraList.length <= 0">
@@ -78,18 +78,18 @@
 </template>
 
 <script>
-import { mapState } from "pinia";
-import { useMapStore } from "@/stores/mapStore";
+import { mapState } from 'pinia';
+import { useMapStore } from '@/stores/mapStore';
 export default {
-  name: "MDvision",
+  name: 'MDvision',
   props: {
     title: {
       type: String,
-      default: "",
+      default: '',
     },
     placeholder: {
       type: String,
-      default: "请输入关键词搜索",
+      default: '请输入关键词搜索',
     },
     enableSearch: {
       type: Boolean,
@@ -113,12 +113,12 @@ export default {
     return {
       listItemActivedIndex: -1,
       optionActivedIndex: -1,
-      searchText: "",
+      searchText: '',
       extraItemActivedIndex: -1,
     };
   },
   computed: {
-    ...mapState(useMapStore, ["addressId"]),
+    ...mapState(useMapStore, ['addressId']),
     activedList() {
       this.listItemActivedIndex = -1;
       return this.options[this.optionActivedIndex]?.children || []; // 判空处理
@@ -128,8 +128,8 @@ export default {
         return this.activedList;
       } else {
         return this.activedList.filter((v) => {
-          if (typeof v === "string") return v.includes(this.searchText);
-          if (typeof v?.label === "string")
+          if (typeof v === 'string') return v.includes(this.searchText);
+          if (typeof v?.label === 'string')
             return v.label.includes(this.searchText);
         });
       }
@@ -160,7 +160,7 @@ export default {
     $reset() {
       this.listItemActivedIndex = -1;
       this.optionActivedIndex = -1;
-      this.searchText = "";
+      this.searchText = '';
       this.extraItemActivedIndex = -1;
     },
     handleOptionClick(option, index) {
@@ -168,22 +168,24 @@ export default {
         // 重复点击
         this.$reset();
       } else {
-        this.$emit("optionClick", { option, index });
+        this.$emit('optionClick', { option, index });
         this.optionActivedIndex = index;
         this.listItemActivedIndex = -1;
         this.extraItemActivedIndex = -1;
       }
     },
     handleListItemClick(item, index) {
-      this.$emit("listItemClick", { item, index });
       this.listItemActivedIndex = index;
       if (this.enableExtraList) {
         this.extraItemActivedIndex = -1;
       }
+      this.$nextTick(() => {
+        this.$emit('listItemClick', { item, index });
+      });
     },
     handleExtraListItemClick(item, index) {
       this.extraItemActivedIndex = index;
-      this.$emit("extraListItemClick", { item, index });
+      this.$emit('extraListItemClick', { item, index });
     },
   },
 };

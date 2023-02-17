@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     setEpidemicSchoolMark() {
-      this.schoolLayerSetGeometries(this.schoolList, "normal");
+      this.schoolLayerSetGeometries(this.schoolList, { styleId: "normal" });
     },
     updateTypeAreaData() {
       this.typeAreaRes = [];

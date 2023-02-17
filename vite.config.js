@@ -52,7 +52,6 @@ export default defineConfig({
   ],
   build: {
     // target: 'es2015'
-    target: 'es2020',
     // 自定义底层的 Rollup 打包配置, 查看 Rollup 选项文档 获取更多细节 https://rollupjs.org/configuration-options/
     rollupOptions: {
       // 告诉打包工具 在external配置的 都是外部依赖项  不需要打包
