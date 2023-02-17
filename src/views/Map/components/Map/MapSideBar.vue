@@ -1,6 +1,6 @@
 <template>
   <div class="map-sidebar">
-    <!-- <div
+    <div
       :class="[
         'map-sidebar-item',
         addressId === item.addressId ? 'selected' : '',
@@ -10,7 +10,7 @@
       @click="handleSlideBarClick(item.addressId)"
     >
       {{ item.addressName }}
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -54,11 +54,11 @@ export default {
   padding: 0.3rem 0;
   width: 0.9rem;
   height: calc(100vh - 0.54rem);
-  background: url('/src/assets/img/info-window-border.png') top right/34% 10% no-repeat,
-    linear-gradient(270deg, #026fb3d7 0%,#01558ad7 30%, transparent 70%) no-repeat;
-  transform: scaleX(-1);
-  // background-color: #1a2338;
-  // box-shadow: 0px 3px 8px 0px rgba(148, 158, 180, 0.17);
+  // background: url('/src/assets/img/info-window-border.png') top right/34% 10% no-repeat,
+  //   linear-gradient(270deg, #026fb3d7 0%,#01558ad7 30%, transparent 70%) no-repeat;
+  // transform: scaleX(-1);
+  background-color: #1a2338;
+  box-shadow: 0px 3px 8px 0px rgba(148, 158, 180, 0.17);
 }
 
 .map-sidebar-item {

@@ -30,10 +30,8 @@ export default {
   // width: fit-content;
   margin: 0.06rem 0;
   padding: 0.12rem 0;
-  // background-image: url("/src/assets/img/content-bg.png");
-  // background-color: #0f436eda;
-  // background-size: 100% 100%;
   border-radius: 2px;
+  background: url("/src/assets/img/content-bg.png") repeat 100% 100%;
 }
 .right-toolbar-top {
   display: flex;

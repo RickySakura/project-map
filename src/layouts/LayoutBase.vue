@@ -6,7 +6,6 @@
     <div class="home-sidebar">
       <slot name="sidebar"></slot>
     </div>
-    <div class="shadow"></div>
     <div class="home-content">
       <slot name="content"></slot>
     </div>
@@ -14,15 +13,6 @@
 </template>
 
 <style lang="less" scoped>
-.shadow {
-  box-shadow: rgb(26 26 44) 7px -1px 250px 100px inset;
-  position: absolute;
-  z-index: 2;
-  height: 100vh;
-  width: 100vw;
-  pointer-events: none;
-  user-select: none;
-}
 .home-container {
   position: relative;
   width: 100%;

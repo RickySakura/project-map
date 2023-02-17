@@ -1,6 +1,5 @@
 <template>
   <div class="map-container" id="map-container"></div>
-  <div class="map-left-border"></div>
   <TheMapBorderLine />
 </template>
 
@@ -81,16 +80,5 @@ export default {
 .map-container {
   height: 100%;
   z-index: 1;
-}
-.map-left-border {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  right: 0;
-  padding: 0.3rem 0;
-  width: 0.9rem;
-  height: calc(100vh - 0.54rem);
-  background: url('/src/assets/img/info-window-border.png') top right/34% 10% no-repeat,
-    linear-gradient(270deg, #026fb3d7 0%,#01558ad7 30%, transparent 70%) no-repeat;
 }
 </style>
