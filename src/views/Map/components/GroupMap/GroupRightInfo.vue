@@ -268,8 +268,8 @@ export default {
       for (let item of data.studentsCoveredByTheGroupData) {
         let type = schoolTypeEnum.find((v) => {
           return v.schoolType === item.runningType;
-        }) || { describe: '' };
-        schoolType.push(type.describe);
+        }) || { label: '' };
+        schoolType.push(type.label);
 
         officeData.push((item.studentNumber / totalStudents).toFixed(2));
         stuData.push(item.studentNumber / 10000);

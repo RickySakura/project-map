@@ -204,16 +204,14 @@ export default {
       }
       const educationPieOption = {
         color: [
-          '#6CC1FF',
-          '#FFBA88',
-          '#1E75FE',
-          '#6DD5AB',
-          '#CB8EED',
-          '#42D198',
-          '#FF7475',
-          '#C3C3C3',
-          '#F98CB5',
-          '#F98CB5',
+          '#36ac04',
+          '#ff7e21',
+          '#757bf2',
+          '#bf4dff',
+          '#367fff',
+          '#c05c5c',
+          '#1a829e',
+          '#047500',
         ],
         title: {
           left: 'center',

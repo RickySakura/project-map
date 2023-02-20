@@ -8,6 +8,7 @@ import { useMapStore } from '@/stores/mapStore';
 import { useMapInstanceStore } from '@/stores/mapInstanceStore';
 import { mapState } from 'pinia';
 import { useIsNull } from '@/utils/useIsNull';
+import { schoolTypeEnum } from '@/utils/useEnums';
 
 export default {
   computed: {
@@ -118,6 +119,38 @@ export default {
     },
     // 根据学校数据创建geometry对象，用于更新点位数据
     createSchoolGeometry(school, geometryOptions) {
+      // 用于配置地图上不同类型点的样式，也可以根据mapType配置每个地图不同的点样式
+      const getStyleId = () => {
+        let styleId = 'normal'; // 默认样式
+        // 办学地图点位样式
+        if (this.mapType === 'running-school') { 
+          if (!school.runningType) { 
+            console.warn('该学校没有办学类型信息', school);
+            return
+          }
+          let schoolOption = schoolTypeEnum.find(v => v.schoolType === Number(school.runningType))
+          return schoolOption?.styleId || styleId
+        }
+
+        if (school.officeType === '1') styleId = 'municipal-school'; // 市属学校样式
+        if (school.officeType === '2') styleId = 'borough-school'; // 区属学校样式
+        if (school.exemplaryType === '1') styleId = 'exem1';
+        if (school.exemplaryType === '2') styleId = 'exem2';
+        if (school.exemplaryType === '3') styleId = 'exem3';
+        if (school.isCoreSchool === '1') styleId = 'core-school'; // 核心学校样式
+        if (school.examSiteType) {
+          if (school.examSiteType === '1')
+            return `adult-exam${school.examSiteStatus}`;
+          if (school.examSiteType === '2') return `teacher-exam`;
+          if (school.examSiteType === '3') return `self-exam`;
+          if (school.examSiteType === '4')
+            return `artistic-exam${school.examSiteStatus}`;
+          if (school.examSiteType === '5') return `graduate-exam`;
+        }
+        return styleId;
+      }
+
+
       let latitude = school.latitude || school.schoolLatitude;
       let longitude = school.longitude || school.schoolLongitude;
       if (typeof latitude === 'string') {
@@ -130,25 +163,7 @@ export default {
       if (useIsNull(longitude)) longitude = 0;
 
       let geometry = {
-        styleId: (() => {
-          let styleId = 'normal';
-          if (school.officeType === '1') styleId = 'municipalSchool';
-          if (school.officeType === '2') styleId = 'boroughSchool';
-          if (school.exemplaryType === '1') styleId = 'exemStyle1';
-          if (school.exemplaryType === '2') styleId = 'exemStyle2';
-          if (school.exemplaryType === '3') styleId = 'exemStyle3';
-          if (school.isCoreSchool === '1') styleId = 'coreSchool';
-          if (school.examSiteType) {
-            if (school.examSiteType == '1')
-              return `adultCollegeExam${school.examSiteStatus}`;
-            if (school.examSiteType == '2') return `teachingExam`;
-            if (school.examSiteType == '3') return `selfExam`;
-            if (school.examSiteType == '4')
-              return `artisticExam${school.examSiteStatus}`;
-            if (school.examSiteType == '5') return `graduateExam`;
-          }
-          return styleId;
-        })(),
+        styleId: getStyleId(),
         position: new TMap.LatLng(Number(latitude), Number(longitude)), //点标记坐标位置
         content: school.schoolName || school.name || '',
         properties: {

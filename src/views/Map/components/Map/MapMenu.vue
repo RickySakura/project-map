@@ -45,6 +45,7 @@ export default {
   },
   methods: {
     handleMenuItemClick(mapType) {
+      console.log('mapType', mapType);
       this.mapStore.mapType = mapType;
     },
   },

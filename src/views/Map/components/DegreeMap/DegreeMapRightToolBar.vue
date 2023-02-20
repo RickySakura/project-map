@@ -13,7 +13,7 @@
             <el-option
               v-for="item in selectOptions"
               :key="item.schoolType"
-              :label="item.describe"
+              :label="item.label"
               :value="item.schoolType"
             >
             </el-option>
@@ -271,31 +271,31 @@ export default {
       selectOptions: [
         {
           schoolType: '',
-          describe: '全部',
+          label: '全部',
         },
         {
           schoolType: 111,
-          describe: '幼儿园小班',
+          label: '幼儿园小班',
         },
         {
           schoolType: 112,
-          describe: '幼儿园中班',
+          label: '幼儿园中班',
         },
         {
           schoolType: 113,
-          describe: '幼儿园大班',
+          label: '幼儿园大班',
         },
         {
           schoolType: 21,
-          describe: '小学',
+          label: '小学',
         },
         {
           schoolType: 31,
-          describe: '初中',
+          label: '初中',
         },
         {
           schoolType: 34,
-          describe: '高中',
+          label: '高中',
         },
       ],
       value: '',

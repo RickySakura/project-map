@@ -188,7 +188,7 @@ export default {
         } else {
           let typeName = schoolTypeEnum.find(
             (item) => item.schoolType === Number(v.runningType)
-          ).describe;
+          ).label;
           label.push(typeName);
           studentNumber.push(v.studentNumber);
           teacherNumber.push(v.teacherNumber);

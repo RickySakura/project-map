@@ -8,15 +8,15 @@ export function createInfoWindowTemplate(result) {
   // 办学类型tag
   let runningType = schoolTypeEnum.find(
     (item) => item.schoolType === Number(result.runningType)
-  )?.describe;
+  )?.label;
   // 办学性质tag
   let schoolProperties = schoolPropertiesEnum.find(
     (item) => item.value === Number(result.schoolProperties)
-  )?.describe;
+  )?.label;
   // 学校属性tag
   let schoolAttribute = schoolAttributeEnum.find(
     (item) => item.value === Number(result.schoolAttribute)
-  )?.describe;
+  )?.label;
   return `
   <div class="map-info-window">
   <div class="info-window-title">${result.schoolName || '-'}</div>

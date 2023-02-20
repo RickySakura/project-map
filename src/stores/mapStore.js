@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { toRaw } from 'vue';
+import { markRaw, toRaw } from 'vue';
 
 export const useMapStore = defineStore('map', {
   state: () => {

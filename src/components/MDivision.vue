@@ -168,10 +168,12 @@ export default {
         // 重复点击
         this.$reset();
       } else {
-        this.$emit('optionClick', { option, index });
         this.optionActivedIndex = index;
         this.listItemActivedIndex = -1;
         this.extraItemActivedIndex = -1;
+        this.$nextTick(() => {
+          this.$emit('optionClick', { option, index });
+        });
       }
     },
     handleListItemClick(item, index) {
@@ -185,7 +187,9 @@ export default {
     },
     handleExtraListItemClick(item, index) {
       this.extraItemActivedIndex = index;
-      this.$emit('extraListItemClick', { item, index });
+      this.$nextTick(() => {
+        this.$emit('extraListItemClick', { item, index });
+      });
     },
   },
 };

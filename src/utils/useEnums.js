@@ -2,99 +2,153 @@
 const schoolTypeEnum = [
   {
     schoolType: '',
-    describe: '全部',
+    label: '全部',
   },
   {
     schoolType: 11,
-    describe: '幼儿园',
+    label: '幼儿园',
+    styleId: 'kindergarten',
   },
   {
     schoolType: 111,
-    describe: '幼儿园小班',
+    label: '幼儿园小班',
+    styleId: 'kindergarten',
   },
   {
     schoolType: 112,
-    describe: '幼儿园中班',
+    label: '幼儿园中班',
+    styleId: 'kindergarten',
   },
   {
     schoolType: 113,
-    describe: '幼儿园大班',
+    label: '幼儿园大班',
+    styleId: 'kindergarten',
   },
   {
     schoolType: 21,
-    describe: '小学',
+    label: '小学',
+    styleId: 'primary-school',
   },
   {
     schoolType: 31,
-    describe: '初中',
+    label: '初中',
+    styleId: 'middle-school',
   },
   {
     schoolType: 312,
-    describe: '九年一贯制',
+    label: '九年一贯制',
+    styleId: 'middle-school',
   },
   {
     schoolType: 34,
-    describe: '高中',
+    label: '高中',
+    styleId: 'high-school',
   },
   {
     schoolType: 341,
-    describe: '完全中学',
+    label: '完全中学',
+    styleId: 'high-school',
   },
   // {
   //   schoolType: 341,
-  //   describe: "高级中学",
+  //   label: "高级中学",
   // },
   {
     schoolType: 345,
-    describe: '十二年一贯制',
+    label: '十二年一贯制',
+    styleId: 'high-school',
   },
   {
     schoolType: 51,
-    describe: '特殊教育',
+    label: '特殊教育',
+    styleId: 'special-education',
   },
   {
     schoolType: 98,
-    describe: '外籍子女学校',
+    label: '外籍子女学校',
+    styleId: 'training-institutions',
   },
   {
     schoolType: 36,
-    describe: '市区属中职',
+    label: '市区属中职',
+    styleId: 'secondary-vocational',
   },
   {
     schoolType: 369,
-    describe: '省中职',
+    label: '省中职',
   },
   {
     schoolType: 366,
-    describe: '市属技工学校',
+    label: '市属技工学校',
   },
   {
     schoolType: 41,
-    describe: '高等教育',
+    label: '高等教育',
   },
   {
     schoolType: 93,
-    describe: '教育培训机构',
+    label: '教育培训机构',
+    styleId: 'foreign-children',
   },
   {
     schoolType: 367,
-    describe: '省属技工学校',
+    label: '省属技工学校',
   },
   {
     schoolType: 99,
-    describe: '其他',
+    label: '其他',
   },
 ];
 
-// 学校性质枚举
+// 学校类型选项，用于办学地图和学位地图的选择器
+const schoolTypeOptions = [
+  {
+    value: '',
+    label: '全部',
+  },
+  {
+    value: 11,
+    label: '幼儿园',
+  },
+  {
+    value: 21,
+    label: '小学',
+  },
+  {
+    value: 31,
+    label: '初中',
+  },
+  {
+    value: 34,
+    label: '高中',
+  },
+  {
+    value: 36,
+    label: '中职教育',
+  },
+  {
+    value: 51,
+    label: '特殊教育',
+  },
+  {
+    value: 93,
+    label: '教育培训机构',
+  },
+  {
+    value: 98,
+    label: '外籍子女学校',
+  },
+];
+
+// 学校性质枚举F
 const schoolPropertiesEnum = [
   {
     value: 1,
-    describe: '公办',
+    label: '公办',
   },
   {
     value: 2,
-    describe: '民办',
+    label: '民办',
   },
 ];
 
@@ -102,16 +156,21 @@ const schoolPropertiesEnum = [
 const schoolAttributeEnum = [
   {
     value: 1,
-    describe: '市属学校',
+    label: '市属学校',
   },
   {
     value: 2,
-    describe: '区属学校',
+    label: '区属学校',
   },
   {
     value: 3,
-    describe: '省属学校',
+    label: '省属学校',
   },
 ];
 
-export { schoolTypeEnum, schoolPropertiesEnum, schoolAttributeEnum };
+export {
+  schoolTypeEnum,
+  schoolTypeOptions,
+  schoolPropertiesEnum,
+  schoolAttributeEnum,
+};

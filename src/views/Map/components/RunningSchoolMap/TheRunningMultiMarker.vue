@@ -2,7 +2,7 @@
  * @ 创建人: 熊浩翔
  * @ 创建时间: 2023-02-05 14:24:54
  * @ 最后修改人: 熊浩翔
- * @ 最后修改时间: 2023-02-17 16:32:43
+ * @ 最后修改时间: 2023-02-20 10:08:17
  * @ 描述: 办学地图中的点位控制及其事件
  -->
 <template></template>
@@ -47,7 +47,6 @@ export default {
     setRunningSchoolMark() {
       // 2023 2 14 修改，过滤教育培训机构
       let schoolList = useRunningTypeFilter(this.schoolList);
-      console.log(schoolList);
       this.schoolLayerSetGeometries(schoolList);
 
       // this.schoolLayerSetGeometries(this.schoolList);

@@ -31,6 +31,7 @@ import { apiGetRunningSchool } from "@/api/useRunningSchoolRequest";
 import { useMapStore } from "@/stores/mapStore";
 import { mapState } from "pinia";
 import getAssetsFile from '@/utils/getAssetsFile';
+import { schoolTypeOptions } from "@/utils/useEnums";
 
 export default {
   setup() {
@@ -51,44 +52,7 @@ export default {
           children: [],
         },
       ],
-      schoolTypeOptions: [
-        {
-          value: "",
-          label: "全部",
-        },
-        {
-          value: 11,
-          label: "幼儿园",
-        },
-        {
-          value: 21,
-          label: "小学",
-        },
-        {
-          value: 31,
-          label: "初中",
-        },
-        {
-          value: 34,
-          label: "高中",
-        },
-        {
-          value: 36,
-          label: "中职教育",
-        },
-        {
-          value: 51,
-          label: "特殊教育",
-        },
-        {
-          value: 93,
-          label: "教育培训机构",
-        },
-        {
-          value: 98,
-          label: "外籍子女学校",
-        },
-      ],
+      schoolTypeOptions,
       schoolType: 34,
       exemplaryTypeOptions: [
         {
