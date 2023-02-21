@@ -58,22 +58,22 @@ const modules = import.meta.glob(
   { eager: true, import: 'default' }
 );
 let markStyles = {};
-let values = Object.values(modules);
-values.forEach((src) => {
-  if (typeof src !== 'string') return;
-  let key = src.slice(src.lastIndexOf('/') + 1, src.lastIndexOf('.'));
+// 这里必须同时遍历 modules 的 key和value，应为import.meta.glob导入的如果是图片的话 value 会被编译成url或者base64格式，所以
+// 不能作为直接参照修改，必须还要借助modules 的key，因为key是不会被编译的！！！
+Object.entries(modules).forEach(([key, value]) => { 
+  let styleKey = key.slice(key.lastIndexOf('/') + 1, key.lastIndexOf('.'));
   let baseOption = {
-    width: 20, // 点标记样式宽度（像素）
-    height: 20, // 点标记样式高度（像素）
-    src,
+    width: 13, // 点标记样式宽度（像素）
+    height: 13, // 点标记样式高度（像素）
+    src: value,
     offset: { x: 0, y: 30 },
     color: '#764ff8',
     strokeColor: 'rgb(255, 255, 255)',
     strokeWidth: 2,
   };
-  Object.assign(baseOption, markOptions[key]);
-  markStyles[key] = new TMap.MarkerStyle(baseOption);
-});
+  Object.assign(baseOption, markOptions[styleKey]);
+  markStyles[styleKey] = new TMap.MarkerStyle(baseOption);
+})
 
 export const useMapInstanceStore = defineStore('map-instance', {
   state: () => {

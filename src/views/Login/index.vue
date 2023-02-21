@@ -77,37 +77,37 @@
 </template>
 
 <script>
-import { apiHandleUserLogin, apiGetRandomImage } from "@/api/useLoginRequest";
+import { apiHandleUserLogin, apiGetRandomImage } from '@/api/useLoginRequest';
 
 export default {
   setup(props) {
     // 不会在模板中引入的变量，即非响应式变量，在setup中定义
     const noRefValues = {
-      checkKey: "",
+      checkKey: '',
       remember: false,
       isSwitchOrg: false,
       expires: 7, // 登陆cookie有效期
-      captchaKey: "",
+      captchaKey: '',
       accountRules: {
         username: [
           {
             required: true,
-            message: "请输入机构编码",
-            trigger: ["blur", "change"],
+            message: '请输入机构编码',
+            trigger: ['blur', 'change'],
           },
         ],
         password: [
           {
             required: true,
-            message: "请输入密码",
-            trigger: ["blur", "change"],
+            message: '请输入密码',
+            trigger: ['blur', 'change'],
           },
         ],
         captcha: [
           {
             required: true,
-            message: "请输入验证码",
-            trigger: ["blur", "change"],
+            message: '请输入验证码',
+            trigger: ['blur', 'change'],
           },
         ],
       },
@@ -115,47 +115,47 @@ export default {
         username: [
           {
             required: true,
-            message: "请输入证件号码",
-            trigger: ["blur", "change"],
+            message: '请输入证件号码',
+            trigger: ['blur', 'change'],
           },
         ],
         password: [
           {
             required: true,
-            message: "请输入密码",
-            trigger: ["blur", "change"],
+            message: '请输入密码',
+            trigger: ['blur', 'change'],
           },
         ],
         captcha: {
           required: true,
-          message: "请输入验证码",
-          trigger: ["blur", "change"],
+          message: '请输入验证码',
+          trigger: ['blur', 'change'],
         },
       },
       redirect: undefined,
     };
     return noRefValues;
   },
-  name: "Login",
+  name: 'Login',
   data() {
     return {
-      activeName: "account",
-      captchaImg: "",
-      captchaKey: "",
+      activeName: 'account',
+      captchaImg: '',
+      captchaKey: '',
       loginForm: {
-        username: "",
-        password: "",
-        captcha: "",
+        username: '',
+        password: '',
+        captcha: '',
       },
       identityForm: {
-        username: "",
-        password: "",
-        captcha: "",
+        username: '',
+        password: '',
+        captcha: '',
       },
-      passwordType: "password",
+      passwordType: 'password',
       loading: false,
       accountActivate: false, // 是否激活账号
-      captchaImg: "",
+      captchaImg: '',
     };
   },
   methods: {
@@ -176,35 +176,41 @@ export default {
      */
     handleLogin() {
       const form =
-        this.activeName === "account" ? "accountForm" : "identityForm";
+        this.activeName === 'account' ? 'accountForm' : 'identityForm';
       this.$refs[form].validate((valid) => {
         if (valid) {
           this.loading = true;
-          if (this.activeName === "account") {
+          if (this.activeName === 'account') {
             let params = { ...this.loginForm, checkKey: this.checkKey };
             apiHandleUserLogin(params)
               .then((res) => {
-                sessionStorage.setItem("token", res.result.token);
-                // 临时更改
-                sessionStorage.setItem(
-                  "username",
-                  res.result.userInfo.username
-                );
-                // 路由跳转到主页
-                this.$router.push({
-                  path: "/map"
-                });
-                this.loading = false;
+                if (res.code === 200 || res.success) {
+                  sessionStorage.setItem('token', res.result.token);
+                  // 临时更改
+                  sessionStorage.setItem(
+                    'username',
+                    res.result.userInfo.username
+                  );
+                  // 路由跳转到主页
+                  this.$router.push({
+                    path: '/map',
+                  });
+                } else { 
+                  this.$message.error(res.message)
+                }
               })
               .catch((err) => {
+                this.$message.error(err)
                 console.error(
-                  "❌ ~ file: index.vue:198 ~ this.$refs[form].validate ~ err",
+                  '❌ ~ file: index.vue:198 ~ this.$refs[form].validate ~ err',
                   err
                 );
-                this.loginForm.captcha = "";
+                this.loginForm.captcha = '';
                 this.createCaptcha();
               })
               .finally(() => {
+                this.createCaptcha();
+                this.loading = false;
               });
           }
         } else {
@@ -216,9 +222,9 @@ export default {
      * 处理忘记密码
      */
     handleForgetPwd() {
-      this.$alert("如您忘记密码，请联系管理员", "温馨提示", {
-        confirmButtonText: "好的",
-        customClass: "forget-pwd",
+      this.$alert('如您忘记密码，请联系管理员', '温馨提示', {
+        confirmButtonText: '好的',
+        customClass: 'forget-pwd',
       });
     },
   },
@@ -331,7 +337,7 @@ export default {
   z-index: 9;
 
   &:after {
-    content: "";
+    content: '';
     width: 0;
     height: 0;
     clear: both;

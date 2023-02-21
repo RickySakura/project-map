@@ -38,13 +38,13 @@ export default {
       options: [
         {
           label: "市属教育集团 (含0个集团，共0所)",
-          icon: getAssetsFile("marks/room-icon-blue.png"),
+          icon: getAssetsFile("marks/municipal-school.png"),
           value: 1, // 1代表市
           children: [],
         },
         {
           label: "区属教育集团 (含0个集团，共0所)",
-          icon: getAssetsFile("marks/room-icon-green.png"),
+          icon: getAssetsFile("marks/borough-school.png"),
           value: 2, // 2代表区
           children: [],
         },
