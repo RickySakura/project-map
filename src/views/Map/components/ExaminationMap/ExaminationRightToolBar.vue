@@ -5,7 +5,7 @@
 
 <script>
 import { useMapStore } from "@/stores/mapStore";
-import { computed } from "@vue/runtime-core";
+import { computed } from "vue";
 export default {
   setup() {
     const mapStore = useMapStore();

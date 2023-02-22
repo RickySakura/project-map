@@ -14,7 +14,7 @@
 
 <script setup>
 import { useMapStore } from "@/stores/mapStore";
-import { ref, watch } from "@vue/runtime-core";
+import { ref, watch } from "vue";
 
 let isShowGroupInfoDetail = ref(false);
 watch(
