@@ -1,11 +1,10 @@
 <template>
-  <examinationRightInfo v-if="addressId === ''"></examinationRightInfo>
-  <examinationRightInfoDetail v-else></examinationRightInfoDetail>
+  <ExaminationRightInfo v-if="addressId === ''"></ExaminationRightInfo>
+  <ExaminationRightInfoDetail v-else></ExaminationRightInfoDetail>
 </template>
 
 <script>
 import { useMapStore } from "@/stores/mapStore";
-import { computed } from "@vue/runtime-core";
 export default {
   setup() {
     const mapStore = useMapStore();
