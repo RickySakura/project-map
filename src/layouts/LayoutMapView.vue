@@ -21,7 +21,23 @@ export default {};
   z-index: 3;
 }
 .map-left-toolbar {
-  left: 1.1rem;
+  // left: 1.1rem;
+  top: .13rem;
+  left: .11rem;
+  padding: .22rem;
+
+  // 新增地图边框
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1.28rem;
+    height: 9.51rem;
+    background: url('/src/assets/img/map/tool-border.png') no-repeat top
+      left/100% 100%;
+    transform: scaleX(-1);
+  }
 }
 .map-center-toolbar {
   width: 100%;
@@ -29,7 +45,18 @@ export default {};
   justify-content: center;
 }
 .map-right-toolbar {
-  right: 0;
+  // right: 0;
+  right: .11rem;
   // background-color: #052f4e;
+  &::before {
+    content: '';
+    position: fixed;
+    top: .45rem;
+    right: 0;
+    width: 1.28rem;
+    height: 9.51rem;
+    background: url('/src/assets/img/map/tool-border.png') no-repeat top
+      left/100% 100%;
+  }
 }
 </style>

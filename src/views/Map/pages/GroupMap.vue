@@ -2,11 +2,11 @@
   <div class="group-map map-tools-container">
     <LayoutMapView>
       <template #left-tool>
-        <GroupMapLeftToolBar> </GroupMapLeftToolBar>
+        <GroupMapLeftToolBar />
       </template>
 
       <template #right-tool>
-        <GroupMapRightToolBar></GroupMapRightToolBar>
+        <GroupMapRightToolBar />
       </template>
     </LayoutMapView>
     <TheGroupMultiMarker />

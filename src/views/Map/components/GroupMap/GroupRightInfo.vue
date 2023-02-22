@@ -305,8 +305,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.right-toolbar-container {
-}
 .toolbar-block-wrapper {
   display: flex;
   justify-content: space-between;

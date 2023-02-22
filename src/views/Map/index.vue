@@ -3,12 +3,18 @@
     <template #header>
       <MapHeader />
     </template>
+
     <template #sidebar>
-      <MapSideBar />
+      <!-- <MapSideBar /> -->
     </template>
+
     <template #content> 
       <TheMap />
       <router-view></router-view>
+    </template>
+
+    <template #footer>
+      <MapTypeMenu />
     </template>
   </LayoutBase>
 </template>

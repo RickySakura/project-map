@@ -32,9 +32,11 @@ export default {
     };
   },
   created() {
-    this.menuList = useLocalData('menuRes');
-    this.menuList.forEach((v) => {
-      v.url = getAssetsFile(v.url);
+    this.menuList = useLocalData('menuRes').map(v => { 
+      return {
+        ...v,
+        url: getAssetsFile(v.url)
+      }
     });
     // 如果不是 admin 用户则默认导航到考点地图
     if (this.activedUser !== 'admin') {

@@ -1,6 +1,9 @@
 <template>
   <div class="group-map-right-main">
+    <!-- 全市集团地图右侧栏 -->
     <GroupRightInfo v-if="!isShowGroupInfoDetail" />
+
+    <!-- 区域集团地图右侧栏 -->
     <GroupRightInfoDetail v-else />
     <div
       class="back"
@@ -14,7 +17,6 @@
 
 <script setup>
 import { useMapStore } from "@/stores/mapStore";
-import { ref, watch } from "@vue/runtime-core";
 
 let isShowGroupInfoDetail = ref(false);
 watch(

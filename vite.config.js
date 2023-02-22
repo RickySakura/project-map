@@ -13,20 +13,21 @@ import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import topLevelAwait from 'vite-plugin-top-level-await';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { createHtmlPlugin } from 'vite-plugin-html'
-import externalGlobals from 'rollup-plugin-external-globals'
-
+import { createHtmlPlugin } from 'vite-plugin-html';
+import externalGlobals from 'rollup-plugin-external-globals';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
     AutoImport({
+      imports: ['vue'],
+      dts: 'src/auto-import.d.ts',
       resolvers: [ElementPlusResolver()],
     }),
     Components({
       resolvers: [ElementPlusResolver()],
-      dirs: ['src/components', 'src/views', 'src/layouts'],
+      dirs: ['src/components', 'src/components/ui', 'src/views', 'src/layouts'],
     }),
     // 允许打包中使用JS文件顶级async await
     topLevelAwait({
@@ -46,23 +47,23 @@ export default defineConfig({
           vueGlobal: `<script src="//unpkg.com/vue@3.2.45"></script>`,
           elementPlusScript: `<script src="//unpkg.com/element-plus@2.2.25"></script><script src="https://cdn.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>`,
           elementPlusCSS: `<link rel="stylesheet" href="//unpkg.com/element-plus@2.2.25/dist/index.css" />`,
-        }
-      }
-    })
+        },
+      },
+    }),
   ],
   build: {
     // target: 'es2015'
     // 自定义底层的 Rollup 打包配置, 查看 Rollup 选项文档 获取更多细节 https://rollupjs.org/configuration-options/
     rollupOptions: {
       // 告诉打包工具 在external配置的 都是外部依赖项  不需要打包
-      external: ['vue', 'element-plus','echarts'],
+      external: ['vue', 'element-plus', 'echarts'],
       plugins: [
         externalGlobals({
           'element-plus': 'ElementPlus',
-          'echarts': 'echarts'
-        })
-      ]
-    }
+          echarts: 'echarts',
+        }),
+      ],
+    },
   },
   resolve: {
     alias: {

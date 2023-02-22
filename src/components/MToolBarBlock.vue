@@ -37,7 +37,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 0.15rem;
+  // padding-bottom: 0.15rem;
+  margin-bottom: .15rem;
 }
 .right-toolbar-title {
   font-size: 0.13rem;

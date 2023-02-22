@@ -46,6 +46,52 @@
       ]
     }
   ],
+  "menuResNew": [
+    {
+      "label": "概况总览",
+      "en": "overview",
+      "url": "mapMenu/overview.png",
+      "accessUserList": [
+        "admin"
+      ]
+    },
+    {
+      "label": "学位监测展示",
+      "en": "degree",
+      "url": "mapMenu/degree2.png",
+      "accessUserList": [
+        "admin"
+      ]
+    },
+    {
+      "label": "集团校展示",
+      "en": "group",
+      "url": "mapMenu/group2.png",
+      "accessUserList": [
+        "admin"
+      ]
+    },
+    {
+      "label": "办学展示",
+      "en": "running-school",
+      "url": "mapMenu/running-school2.png",
+      "accessUserList": [
+        "admin"
+      ]
+    },
+    {
+      "label": "考点展示",
+      "en": "examination",
+      "url": "mapMenu/examination2.png",
+      "accessUserList": [
+        "admin",
+        "city",
+        "zkb440000",
+        "gdjy440000",
+        "gdsksy"
+      ]
+    }
+  ],
   "mapRes": {
     "center": [
       23.26152,

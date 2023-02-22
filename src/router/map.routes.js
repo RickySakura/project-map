@@ -4,6 +4,11 @@ export default {
   redirect: '/map/group',
   children: [
     {
+      name: 'overview',
+      path: 'overview',
+      component: () => import('@/views/Map/pages/OverviewMap.vue')
+    },
+    {
       name: 'group',
       path: 'group',
       component: () => import('@/views/Map/pages/GroupMap.vue')
