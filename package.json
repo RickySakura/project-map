@@ -16,7 +16,9 @@
     "lodash.merge": "^4.6.2",
     "pinia": "^2.0.27",
     "pinia-plugin-persistedstate": "^3.0.1",
+    "pug": "^3.0.2",
     "rollup-plugin-visualizer": "^5.9.0",
+    "swiper": "^9.0.5",
     "vue": "^3.2.41",
     "vue-router": "^4.1.6"
   },

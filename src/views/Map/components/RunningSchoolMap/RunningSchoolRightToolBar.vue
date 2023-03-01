@@ -1,7 +1,7 @@
 <template>
   <div class="right-toolbar-container">
     <MToolBarBlock>
-      <template #toolbar-title> 教育概况 </template>
+      <template #toolbar-title> 办学概况 </template>
       <template #toolbar-content>
         <div class="toolbar-block-wrapper">
           <MInfoBox
@@ -29,22 +29,6 @@
           >
           </MInfoBox>
         </div>
-      </template>
-    </MToolBarBlock>
-    <MToolBarBlock>
-      <template #toolbar-title> 各学段教育体量 </template>
-      <template #toolbar-content>
-        <div class="running-charts__container--pie">
-          <MPieChart ref="educationPie" />
-        </div>
-        <div class="running-charts__container--bar">
-          <MBarChart ref="educationBar" />
-        </div>
-      </template>
-    </MToolBarBlock>
-    <MToolBarBlock>
-      <template #toolbar-title> 办学性质 </template>
-      <template #toolbar-content>
         <div class="toolbar-block-wrapper">
           <MInfoBox
             title="公办学校总数"
@@ -97,12 +81,42 @@
           >
           </MInfoBox>
         </div>
-        <RunningNaturePieChart
-          v-for="item in naturePiesArray"
-          :key="item.schoolType"
-          :title="item.title"
-          :school-type="item.schoolType"
-        />
+      </template>
+    </MToolBarBlock>
+    <MToolBarBlock>
+      <template #toolbar-title> 各学段占比统计 </template>
+      <template #toolbar-content>
+        <div class="running-charts__container--pie">
+          <MPieChart ref="runningPie" />
+        </div>
+        <div class="running-charts__container--bar">
+          <MBarChart ref="runningBar" />
+        </div>
+      </template>
+    </MToolBarBlock>
+
+    <!-- 用于概况总览地图掺入内容 -->
+    <slot name="overview-map"></slot>
+
+    <MToolBarBlock>
+      <template #toolbar-title> 各学段公民办学校概况 </template>
+      <template #toolbar-content>
+        <swiper-container
+          style="height: 2.5rem"
+          direction="vertical"
+          slides-per-view="2"
+          loop="true"
+        >
+        <!-- :autoplay="true"
+          :autoplay-disable-on-interaction="false"
+          :autoplay-pause-on-mouse-enter="true" -->
+          <swiper-slide v-for="item in naturePiesArray" :key="item.schoolType">
+            <RunningNaturePieChart
+              :title="item.title"
+              :school-type="item.schoolType"
+            />
+          </swiper-slide>
+        </swiper-container>
       </template>
     </MToolBarBlock>
   </div>
@@ -116,6 +130,7 @@ import {
 } from '@/api/useRunningSchoolRequest';
 import { useMapStore } from '@/stores/mapStore';
 import { mapState } from 'pinia';
+
 export default {
   data() {
     return {
@@ -190,19 +205,22 @@ export default {
           }
         )
         .catch((err) => {
-          console.error("🚀 ~ file: RunningSchoolRightToolBar.vue:193 ~ updateData ~ err", err)
+          console.error(
+            '🚀 ~ file: RunningSchoolRightToolBar.vue:193 ~ updateData ~ err',
+            err
+          );
         })
         .finally(loading.close);
     },
     updateRunningPie(data) {
-      let educationPieList = [];
+      let runningPieList = [];
       for (let i = 0; i < data.length; i++) {
-        educationPieList = educationPieList?.concat({
+        runningPieList = runningPieList?.concat({
           value: data[i].schoolNumber,
           name: data[i].schoolTypeName,
         });
       }
-      const educationPieOption = {
+      const runningPieOption = {
         color: [
           '#36ac04',
           '#ff7e21',
@@ -223,13 +241,6 @@ export default {
         },
         tooltip: {
           trigger: 'item',
-          backgroundColor: 'rgba(255, 255, 255, 0.95)',
-          textStyle: {
-            color: '#000',
-            fontSize: 10,
-          },
-          borderColor: '#ccc',
-          borderWidth: 1,
         },
         graphic: [
           // 为环形图中间添加文字
@@ -251,9 +262,9 @@ export default {
         series: [
           {
             type: 'pie',
-            radius: '60%',
+            radius: '92%',
             center: ['30%', '50%'],
-            data: educationPieList,
+            data: runningPieList,
             emphasis: {
               itemStyle: {
                 shadowOffsetX: 0,
@@ -271,7 +282,7 @@ export default {
           },
         ],
       };
-      this.$refs.educationPie?.clearOption()?.initChart(educationPieOption);
+      this.$refs.runningPie?.clearOption()?.initChart(runningPieOption);
     },
     updateRunningBar(data) {
       let schoolData = data?.map((item) => {
@@ -319,15 +330,6 @@ export default {
             show: false, // 刻度线不显示
           },
         },
-        tooltip: {
-          backgroundColor: 'rgba(255, 255, 255, 0.95)',
-          textStyle: {
-            // color: "#fff",
-            fontSize: 10,
-          },
-          borderColor: '#ccc',
-          borderWidth: 1,
-        },
         yAxis: {
           axisLine: {
             show: true,
@@ -361,7 +363,7 @@ export default {
             left: '5%',
             right: '4%',
             bottom: '0%',
-            fillerColor: '#D0D2D9',
+            fillerColor: '#4c93cd',
             borderRadius: 5,
             showDetail: false, //即拖拽时候是否显示详细数值信息 默认true
           },
@@ -369,7 +371,7 @@ export default {
         series: [
           {
             barWidth: 5,
-            color: '#47B2FF',
+            color: '#fea100',
             type: 'bar',
           },
           {
@@ -384,7 +386,7 @@ export default {
           bottom: '5%',
         },
       };
-      this.$refs.educationBar?.clearOption()?.initChart(educationBarOption);
+      this.$refs.runningBar?.clearOption()?.initChart(educationBarOption);
     },
   },
 };
@@ -404,11 +406,11 @@ export default {
 }
 
 .running-charts__container--pie {
-  height: 2.4rem;
+  height: 1.5rem;
   // width: 4.7rem;
 }
 .running-charts__container--bar {
-  height: 1.6rem;
+  height: 1.48rem;
   // width: 4.7rem;
   margin: 0 0.1rem;
 }

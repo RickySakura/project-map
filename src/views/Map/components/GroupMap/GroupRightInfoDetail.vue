@@ -1,7 +1,7 @@
 <template>
   <div class="right-toolbar-container">
     <MToolBarBlock>
-      <template #toolbar-title> 学校概况 </template>
+      <template #toolbar-title> 教育集团概况 </template>
       <template #toolbar-content>
         <div class="toolbar-block-wrapper">
           <MInfoBox
@@ -294,7 +294,7 @@ export default {
 }
 .group-charts-container {
   display: flex;
-  width: 4.8rem;
+  width: 100%;
   height: 3.6rem;
 }
 .group-schools {

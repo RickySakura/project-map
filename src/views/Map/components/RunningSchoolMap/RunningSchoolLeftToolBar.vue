@@ -1,81 +1,61 @@
 <template>
   <div class="left-toolbar-container">
-    <MSelect
-      title="学校类型"
-      :options="schoolTypeOptions"
-      v-model="schoolType"
-      placeholder="请选择学校类型"
-      @change="schoolTypeChange"
-    />
-    <MSelect
-      title="示范性学校"
-      :options="exemplaryTypeOptions"
-      v-model="exemplaryType"
-      placeholder="请选择示范性学校"
-      @change="exemplaryTypeChange"
-    />
     <MDivision
       :options="options"
-      :actived-index="activedIndex"
-      @listItemClick="settleListItmeClick"
+      :default-actived-index="3"
+      :list-data="listData"
+      @optionClick="handleOptionClick"
+      @listItemClick="handleListItmeClick"
     >
       <template #title>
+        <img
+          src="@/assets/img/groupMap/group-school-icon.png"
+          alt="icon"
+          class="school-icon"
+        />
         <div>{{ title }}</div>
+      </template>
+
+      <template #label="{ option }">
+        {{ option.label }} ({{ option.schoolNumber }}所)
       </template>
     </MDivision>
   </div>
 </template>
 
 <script>
-import { apiGetRunningSchool } from "@/api/useRunningSchoolRequest";
-import { useMapStore } from "@/stores/mapStore";
-import { mapState } from "pinia";
-import getAssetsFile from '@/utils/getAssetsFile';
-import { schoolTypeOptions } from "@/utils/useEnums";
+import {
+  apiGetRunningSchool,
+  apiGetSchoolTypeOptions,
+} from '@/api/useRunningSchoolRequest';
+import { useMapStore } from '@/stores/mapStore';
+import { schoolTypeOptions } from '@/utils/useEnums';
 
 export default {
   setup() {
     const mapStore = useMapStore();
-    return {
-      mapStore,
-      map: mapStore.map,
-    };
+
+    return { mapStore };
   },
   data() {
+    let options = schoolTypeOptions.filter((item) => item.value);
     return {
-      title: "学校列表",
-      activedIndex: 0,
-      options: [
-        {
-          label: "学校列表",
-          icon: getAssetsFile("runningSchoolMap/point-red.png"),
-          children: [],
-        },
-      ],
-      schoolTypeOptions,
+      title: '学校列表',
       schoolType: 34,
-      exemplaryTypeOptions: [
-        {
-          value: 0,
-          label: "全部",
-        },
-        {
-          value: 1,
-          label: "市示范性高中",
-        },
-        {
-          value: 2,
-          label: "省示范性高中",
-        },
-      ],
-      exemplaryType: 0,
+      options,
+      listData: [],
     };
   },
   computed: {
-    ...mapState(useMapStore, ["addressId"]),
+    addressId() {
+      return this.mapStore.addressId;
+    },
   },
   watch: {
     addressId() {
+      this.updateRunningSchool();
+    },
+    schoolType() {
       this.updateRunningSchool();
     },
   },
@@ -83,24 +63,12 @@ export default {
     this.updateRunningSchool();
   },
   methods: {
-    schoolTypeChange(v) {
-      this.updateRunningSchool();
-    },
-    exemplaryTypeChange(v) {
-      this.updateRunningSchool();
-    },
     updateRunningSchool() {
       let loading = this.$loading();
-      apiGetRunningSchool(
-        this.exemplaryType,
-        this.schoolType,
-        this.addressId,
-        null
-      )
+      apiGetRunningSchool(0, this.schoolType, this.addressId, null)
         .then(({ result }) => {
           this.mapStore.runningSchool.schoolList = result;
-          this.options[0].label = this.title + `，共${result?.length || 0}所`;
-          this.options[0].children = result?.map((v) => {
+          this.listData = result.map((v) => {
             return {
               label: v.schoolName,
               ...v,
@@ -109,15 +77,28 @@ export default {
         })
         .catch((err) => {
           console.error(
-            "❌ ~ file: RunningSchoolLeftToolBar.vue:150 ~ updateRunningSchool ~ err",
+            '❌ ~ file: RunningSchoolLeftToolBar.vue:150 ~ updateRunningSchool ~ err',
             err
           );
         })
         .finally(loading.close);
+
+      apiGetSchoolTypeOptions(this.addressId).then(({ result }) => {
+        if (!Array.isArray(result)) return;
+        this.options.forEach((item) => {
+          let { schoolNumber } = result.find(
+            (v) => item.value == v.runningType
+          );
+          item.schoolNumber = schoolNumber || '--';
+        });
+      });
     },
-    settleListItmeClick({ item }) {
+    handleListItmeClick({ item }) {
       console.log(item);
       this.mapStore.runningSchool.selectedSchool = item;
+    },
+    handleOptionClick({ option }) {
+      this.schoolType = option.value;
     },
   },
 };
@@ -126,11 +107,15 @@ export default {
 <style lang="less" scoped>
 .left-toolbar-container {
   position: relative;
-  top: 0.2rem;
   opacity: 1;
   transition: transform 500ms, opacity 500ms;
 }
 .group-school-icon {
+  width: 0.16rem;
+  height: 0.19rem;
+  margin-right: 0.05rem;
+}
+.school-icon {
   width: 0.16rem;
   height: 0.19rem;
   margin-right: 0.05rem;

@@ -1,7 +1,7 @@
 <template>
   <div class="home-container">
     <!-- 前景图 -->
-    <!-- <img class="frontground" src="../assets/img/map/map-fg.png" alt=""> -->
+    <img class="frontground" src="../assets/img/map/map-fg.png" alt="">
     <div class="home-header">
       <slot name="header"></slot>
     </div>

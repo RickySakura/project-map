@@ -19,7 +19,13 @@ import externalGlobals from 'rollup-plugin-external-globals';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: tag => tag.includes('swiper')
+        }
+      }
+    }),
     AutoImport({
       imports: ['vue'],
       dts: 'src/auto-import.d.ts',
@@ -38,17 +44,24 @@ export default defineConfig({
     }),
     // 开启打包体积可视化面板
     visualizer({ open: true }),
+    /**
+     * 在 index.html 中引入
+     * <%- vueESM %>
+     * <%- vueGlobal %>
+     * <%- elementPlusScript %>
+     * <%- elementPlusCSS %>
+     */
     // 在打包时自动创建 cdn 引入，来代替打包引入，优化打包体积
     createHtmlPlugin({
       minify: true,
-      inject: {
-        data: {
-          vueESM: `<script type="importmap">{"imports":{"vue":"https://unpkg.com/vue@3.2.45/dist/vue.esm-browser.js"} }</script>`,
-          vueGlobal: `<script src="//unpkg.com/vue@3.2.45"></script>`,
-          elementPlusScript: `<script src="//unpkg.com/element-plus@2.2.25"></script><script src="https://cdn.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>`,
-          elementPlusCSS: `<link rel="stylesheet" href="//unpkg.com/element-plus@2.2.25/dist/index.css" />`,
-        },
-      },
+      // inject: {
+      //   data: {
+      //     vueESM: `<script type="importmap">{"imports":{"vue":"https://unpkg.com/vue@3.2.45/dist/vue.esm-browser.js"} }</script>`,
+      //     vueGlobal: `<script src="//unpkg.com/vue@3.2.45"></script>`,
+      //     elementPlusScript: `<script src="//unpkg.com/element-plus@2.2.25"></script><script src="https://cdn.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>`,
+      //     elementPlusCSS: `<link rel="stylesheet" href="//unpkg.com/element-plus@2.2.25/dist/index.css" />`,
+      //   },
+      // },
     }),
   ],
   build: {
@@ -56,13 +69,13 @@ export default defineConfig({
     // 自定义底层的 Rollup 打包配置, 查看 Rollup 选项文档 获取更多细节 https://rollupjs.org/configuration-options/
     rollupOptions: {
       // 告诉打包工具 在external配置的 都是外部依赖项  不需要打包
-      external: ['vue', 'element-plus', 'echarts'],
-      plugins: [
-        externalGlobals({
-          'element-plus': 'ElementPlus',
-          echarts: 'echarts',
-        }),
-      ],
+      // external: ['vue', 'element-plus', 'echarts'],
+      // plugins: [
+      //   externalGlobals({
+      //     'element-plus': 'ElementPlus',
+      //     echarts: 'echarts',
+      //   }),
+      // ],
     },
   },
   resolve: {

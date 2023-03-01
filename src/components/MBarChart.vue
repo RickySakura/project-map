@@ -8,6 +8,13 @@ import chartMixin from '@/mixins/chartMixin';
 const baseOption = {
   tooltip: {
     trigger: 'axis',
+    textStyle: {
+      color: '#fff',
+      fontSize: 16,
+    },
+    borderWidth: 0,
+    className: 'echarts-tooltip-dark',
+    appendToBody: true,
   },
   legend: {
     // 图例

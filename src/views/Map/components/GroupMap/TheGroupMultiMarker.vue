@@ -106,8 +106,8 @@ export default {
 <style lang="less" scoped>
 .control-btn {
   position: absolute;
-  top: 0.05rem;
-  right: 4.86rem;
+  top: 0.07rem;
+  right: 4.96rem;
   z-index: 3;
 
   .btn-content {

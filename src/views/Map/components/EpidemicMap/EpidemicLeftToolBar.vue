@@ -21,7 +21,7 @@
     </div>
     <MDivision
       :options="options"
-      :actived-index="activedIndex"
+      :default-actived-index="activedIndex"
       @optionClick="settleOptionClick"
       @listItemClick="settleListItmeClick"
       class="epidemic-division"

@@ -1,4 +1,4 @@
-import request from '@/utils/request'
+import request, { getAction } from '@/utils/request';
 
 // 考点地图 API
 
@@ -14,9 +14,9 @@ export function apiGetListByExamSiteType(examSiteType = 1, addressId = '') {
     method: 'get',
     params: {
       examSiteType,
-      orgId: addressId
-    }
-  })
+      orgId: addressId,
+    },
+  });
 }
 
 /**
@@ -31,49 +31,35 @@ export function apiGetExaminationOverview(examSiteType = 1, addressId = '') {
     method: 'get',
     params: {
       examSiteType,
-      orgId: addressId
-    }
-  })
-
+      orgId: addressId,
+    },
+  });
 }
 
 /**
- * 获取各区考点占比统计，只用于全市右侧工具栏
+ * 获取各区考点占比统计，或者 获取区的考点考场统计数据
  * @param {string | number} examSiteType 必传！考点类型 0非考试类型 1成人高考 2教资考试 3自考 4艺考。默认为 1。
- * @returns {Promise}
+ * @param {string | number} addressId 如果为空则查全市，否则查区域
  */
-export function apiGetExamSiteStaticList(examSiteType = 1) {
-  return request({
-    url: `/bussiness/examSite/examinationSiteStatisticsList`,
-    method: 'get',
-    params: {
-      examSiteType,
-    }
-  })
-}
-
-/**
- * 获取区的考点考场统计数据
- * @param {string | number} examSiteType 必传！考点类型 0非考试类型 1成人高考 2教资考试 3自考 4艺考。默认为 1。
- * @param {string | number} addressId 行政区ID，不能为空，只用于行政区查询
- * @returns {Promise}
- */
-export function apiGetRegionalStaticList(examSiteType = 1, addressId = '') {
-  return request({
-    url: `/bussiness/examSite/statisticsRegionalExamSites`,
-    method: 'get',
-    params: {
-      examSiteType,
-      orgId: addressId
-    }
-  })
+export function apiGetExamSiteStaticList(examSiteType = 1, addressId = '') {
+  let url, params;
+  if (addressId) {
+    // 区域
+    url = '/bussiness/examSite/statisticsRegionalExamSites';
+    params = { examSiteType, orgId: addressId };
+  } else {
+    // 全市
+    url = '/bussiness/examSite/examinationSiteStatisticsList';
+    params = { examSiteType };
+  }
+  return getAction(url, params);
 }
 
 
 /**
  * 考点地图-查询两坐标直接的导航路线
- * @param {string} from 
- * @param {string} to 
+ * @param {string} from
+ * @param {string} to
  * @returns {Promise}
  */
 export function apiQueryMapNavigation(from, to) {
@@ -82,7 +68,7 @@ export function apiQueryMapNavigation(from, to) {
     method: 'get',
     params: {
       from,
-      to
+      to,
     },
-  })
+  });
 }

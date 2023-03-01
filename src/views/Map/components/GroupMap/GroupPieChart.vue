@@ -19,12 +19,13 @@ export default {
           textStyle: {
             color: '#fff',
             lineHeight: 33,
+            fontSize: '.14rem',
           },
           textAlign: 'center',
           subtext: '',
           subtextStyle: {
             color: '#fff',
-            fontSize: '.16rem',
+            fontSize: '.12rem',
           },
         },
         grid: {
@@ -33,13 +34,12 @@ export default {
         tooltip: {
           trigger: 'item',
           formatter: '{b}: {c} ({d}%)',
+          backgroundColor: '#013c6c',
+          borderWidth: 0,
           textStyle: {
-            color: '#3B414F',
-            fontSize: 10,
+            color: '#fff',
+            fontSize: 16,
           },
-          borderColor: '#ccc',
-          borderWidth: 1,
-          // confine: true,
           appendToBody: true,
         },
         legend: {

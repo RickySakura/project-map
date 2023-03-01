@@ -1,7 +1,7 @@
 <template>
   <div class="right-toolbar-container">
     <MToolBarBlock>
-      <template #toolbar-title> 学校概况 </template>
+      <template #toolbar-title> 教育集团概况 </template>
       <template #toolbar-content>
         <div class="toolbar-block-wrapper">
           <MInfoBox
@@ -54,7 +54,7 @@
         </div>
       </template>
     </MToolBarBlock>
-    <MToolBarBlock>
+    <MToolBarBlock v-if="hiddenOne(3)">
       <template #toolbar-title> 集团覆盖学生概况 </template>
       <template #toolbar-title-bar>
         <div class="group-choose">
@@ -93,6 +93,9 @@ import { useMapStore } from '@/stores/mapStore';
 import { mapState } from 'pinia';
 import { schoolTypeEnum } from '@/utils/useEnums';
 export default {
+  props: {
+    hidden: [Number, Array, String],
+  },
   data() {
     return {
       overviewRes: {},
@@ -159,14 +162,14 @@ export default {
         )
         .catch((err) => {
           console.error(
-            '❌ ~ file: GroupRightInfo.vue:129 ~ updateOptions ~ err',
+            '❌ ~ file: GroupRightInfo.vue:165 ~ updateOptions ~ err',
             err
           );
         })
         .finally(loading.close);
     },
     updateGroupPie(schoolsResPart1, schoolsResPart2, schoolsResPart3) {
-      this.$refs.groupPie?.initChart({
+      let options = {
         title: {
           text: `${this.centerText}\n${schoolsResPart1.schoolsNumber || 0}所`,
           subtext: '\n\n幼儿园、中小学',
@@ -187,7 +190,8 @@ export default {
             ],
           },
         ],
-      });
+      };
+      this.$refs.groupPie?.initChart(options);
 
       this.$refs.smallGroupPie1?.initChart({
         title: {
@@ -197,11 +201,11 @@ export default {
           subtext: '\n\n幼儿园',
           subtextStyle: {
             color: '#fff',
-            fontSize: 14,
+            fontSize: 12,
             height: 200,
           },
           textStyle: {
-            fontSize: 14,
+            fontSize: 12,
             lineHeight: 20,
           },
         },
@@ -232,11 +236,11 @@ export default {
           subtext: '\n\n中小学',
           subtextStyle: {
             color: '#fff',
-            fontSize: 14,
+            fontSize: 12,
             height: 200,
           },
           textStyle: {
-            fontSize: 14,
+            fontSize: 12,
             lineHeight: 20,
           },
         },
@@ -300,11 +304,23 @@ export default {
         this.updateGroupBar(this.studentsRes.boroughRes);
       }
     },
+    hiddenOne(key) {
+      if (
+        (Array.isArray(this.hidden) && this.hidden.include(key)) ||
+        key == this.hidden
+      )
+        return false;
+      return true;
+    },
   },
 };
 </script>
 
 <style lang="less" scoped>
+.right-toolbar-container {
+  width: 4.5rem;
+  height: fit-content;
+}
 .toolbar-block-wrapper {
   display: flex;
   justify-content: space-between;
@@ -314,8 +330,8 @@ export default {
 }
 .group-charts-container {
   display: flex;
-  width: 4.8rem;
-  height: 3.6rem;
+  width: 100%;
+  height: 3.3rem;
   .group-pie-single {
     position: relative;
     height: 100%;

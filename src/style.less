@@ -17,8 +17,10 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+// 定义滚动条样式
 ::-webkit-scrollbar {
-  width: 3px;
+  // width: 3px;
+  width: 0px;
   height: 5px;
   cursor: pointer;
 }
@@ -66,8 +68,8 @@ body {
 }
 
 .el-message__icon {
-  width: .2rem !important;
-  height: .2rem !important;
+  width: 0.2rem !important;
+  height: 0.2rem !important;
 }
 
 .map-rotate-controller {
@@ -82,6 +84,7 @@ body {
   position: relative;
   min-width: 3.9rem;
   overflow-y: scroll;
+  // overflow: hidden;
   height: 9rem;
 }
 
@@ -112,7 +115,7 @@ body {
   transition: max-width 1000ms ease-out;
 
   &::after {
-    content: "";
+    content: '';
     z-index: 9;
     width: 52px;
     height: 144px;
@@ -121,11 +124,12 @@ body {
     right: 0;
     transform: scale(0.5);
     transform-origin: top right;
-    background: url("/src/assets/img/info-window-border.png") top right/100% 100% no-repeat;
+    background: url('/src/assets/img/info-window-border.png') top right/100%
+      100% no-repeat;
   }
 
   &::before {
-    content: "";
+    content: '';
     z-index: 9;
     width: 51px;
     height: 58px;
@@ -134,22 +138,22 @@ body {
     left: 0;
     transform: scale(0.5);
     transform-origin: bottom left;
-    background: url("/src/assets/img/info-window-border2.png") bottom left/100% 100% no-repeat;
+    background: url('/src/assets/img/info-window-border2.png') bottom left/100%
+      100% no-repeat;
   }
 
   .arrow {
-    height: .15rem;
-    width: .15rem;
+    height: 0.15rem;
+    width: 0.15rem;
     position: absolute;
     bottom: 0;
     left: 50%;
     z-index: 1;
     background-color: #0d4b82;
-    transform: translate(-50%,50%) rotate(45deg);
+    transform: translate(-50%, 50%) rotate(45deg);
     border-right: 2px solid #53c2f2e1;
     border-bottom: 2px solid #53c2f2e1;
   }
-  
 }
 .info-window-title {
   font-size: 0.14rem;
@@ -168,8 +172,8 @@ body {
 }
 
 .tags {
-  &:not(&:first-child){
-    margin-top: .1rem;
+  &:not(&:first-child) {
+    margin-top: 0.1rem;
   }
   & > span {
     padding: 0.03rem 0.08rem;
@@ -211,9 +215,10 @@ body {
 .info-window-infos {
   padding: 0.1rem 0 0 0.01rem;
   font-size: 0.14rem;
-  
+
   div span:first-child {
-    white-space: nowrap;color: #fff;
+    white-space: nowrap;
+    color: #fff;
   }
 
   .number {
@@ -244,8 +249,8 @@ body {
     transform: translateX(-2.8rem);
   }
 }
-.epidemic-map  {
-  .map-left-toolbar{
+.epidemic-map {
+  .map-left-toolbar {
     pointer-events: none;
   }
   .open-btn {
@@ -267,8 +272,8 @@ body {
     color: #fff !important;
   }
   .el-select-dropdown__item.hover {
-      background-color: #012d50;
-      // background-color: #1175e5;
+    background-color: #012d50;
+    // background-color: #1175e5;
     &:hover {
       background-color: #1175e5;
       // background-color: #012d50;
@@ -281,12 +286,11 @@ body {
 .el-popper {
   border: none !important;
 }
-
 .el-select {
   .el-input__wrapper {
     width: 1.19rem;
-    height: .2rem;
-    font-size: .12rem;
+    height: 0.2rem;
+    font-size: 0.12rem;
     background-color: #065084;
     box-shadow: 0 0 0 1px #065084 !important;
     &.is-focus {
@@ -300,9 +304,27 @@ body {
   .el-input__suffix {
     .el-input__suffix-inner {
       .el-select__caret {
-        line-height: .2rem;
+        line-height: 0.2rem;
         color: #fff;
       }
     }
+  }
+}
+
+.echarts-tooltip-dark {
+  padding: 0 !important;
+  background-color: #013c6c !important;
+
+  & > div > div > div {
+    &:first-child {
+      background: linear-gradient(90deg, #0166ad 0%, #013c6c 100%);
+      top: 0;
+      width: 100%;
+      padding: .08rem 0 .08rem .1rem;
+    }
+    &:nth-child(2){
+      padding: 0 .1rem .1rem .1rem;
+    }
+
   }
 }

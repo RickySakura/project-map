@@ -64,7 +64,7 @@ export default {
 }
 
 .unit {
-  font-size: 0.19rem;
+  font-size: 0.16rem;
   font-weight: 700;
 }
 .content-extra-info {

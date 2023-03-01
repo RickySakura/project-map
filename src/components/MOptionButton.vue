@@ -1,5 +1,5 @@
 <template>
-  <div :style="styles" :class="['option-btn', active ? 'active' : '']">
+  <div :style="styles" :class="['option-btn', active ? 'actived' : '']">
     <slot></slot>
   </div>
 </template>
@@ -23,7 +23,6 @@ export default {
 .option-btn {
   color: #fff;
   z-index: 2;
-  background-color: red;
   font-size: 0.15rem;
   cursor: pointer;
   display: flex;
@@ -37,7 +36,7 @@ export default {
   -webkit-transition: all 300ms;
   -o-transition: all 300ms;
 
-  &.active {
+  &.actived {
     background: url("/src/assets/img/mapMenu/btn-bg.png");
     background-size: 100% 100%;
   }

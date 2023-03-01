@@ -3,7 +3,7 @@
     <MMesseageWindow
       :style="item.overlayDOM.style"
       ref="districtInfoWindow"
-      v-if="item.addressId === currentDOMIndex"
+      v-if="showWindowInfos && item.addressId === currentDOMIndex"
       :lat="item.overlayDOM.lat"
       :lng="item.overlayDOM.lng"
       :offset="item.overlayDOM.offset || []"
@@ -28,6 +28,12 @@ function MDomOverlay(options) {
 MDomOverlay.prototype = new TMap.DOMOverlay();
 
 export default {
+  props: {
+    showWindowInfos: {
+      type: Boolean,
+      default: true,
+    },
+  },
   data() {
     return {
       districtInfos: useLocalData('runningSchoolRes').runningDistrictInfos,
@@ -132,29 +138,30 @@ export default {
   },
   methods: {
     updateDOMOverlay() {
-      this.$refs.districtInfoWindow.forEach(({ $el, $attrs }) => {
-        let pixel = this.map.projectToContainer(
-          new TMap.LatLng(Number($attrs.lat), Number($attrs.lng))
-        );
+      this.$refs.districtInfoWindow &&
+        this.$refs.districtInfoWindow.forEach(({ $el, $attrs }) => {
+          let pixel = this.map.projectToContainer(
+            new TMap.LatLng(Number($attrs.lat), Number($attrs.lng))
+          );
 
-        if ($attrs.offset.length > 0) {
-          $el.style.transform = `translate(${
-            pixel.getX() + $attrs.offset[0]
-          }px, ${pixel.getY() + $attrs.offset[1]}px)`;
-        } else {
-          // 将移动坐标调整到DOM元素的中心点
-          $el.style.transform = `translate(${
-            pixel.getX() - $el.clientWidth / 2
-          }px, ${pixel.getY() - $el.clientHeight / 2}px)`;
-        }
-        // this.resizeDOMOverlay(
-        //   {
-        //     width: window.innerWidth,
-        //     height: window.innerHeight,
-        //   },
-        //   $el
-        // );
-      });
+          if ($attrs.offset.length > 0) {
+            $el.style.transform = `translate(${
+              pixel.getX() + $attrs.offset[0]
+            }px, ${pixel.getY() + $attrs.offset[1]}px)`;
+          } else {
+            // 将移动坐标调整到DOM元素的中心点
+            $el.style.transform = `translate(${
+              pixel.getX() - $el.clientWidth / 2
+            }px, ${pixel.getY() - $el.clientHeight / 2}px)`;
+          }
+          // this.resizeDOMOverlay(
+          //   {
+          //     width: window.innerWidth,
+          //     height: window.innerHeight,
+          //   },
+          //   $el
+          // );
+        });
     },
     // 手动媒体查询
     resizeDOMOverlay({ width, height }, el = null) {
@@ -171,6 +178,7 @@ export default {
     },
     // DOMOverlay 轮播用方法
     changeDomBanner(addressId) {
+      if (!this.showWindowInfos) return;
       this.currentDOMIndex = addressId;
       this.currentLineIndex = this.districtInfos.findIndex(
         (v) => v.addressId == addressId

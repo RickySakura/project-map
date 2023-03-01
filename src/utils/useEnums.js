@@ -1,3 +1,5 @@
+import getAssetsFile from "./getAssetsFile";
+
 // 办学类型枚举，等价于接口里的runningType
 const schoolTypeEnum = [
   {
@@ -109,34 +111,42 @@ const schoolTypeOptions = [
   {
     value: 11,
     label: '幼儿园',
+    icon: getAssetsFile('marks/kindergarten.png'),
   },
   {
     value: 21,
     label: '小学',
+    icon: getAssetsFile('marks/primary-school.png'),
   },
   {
     value: 31,
     label: '初中',
+    icon: getAssetsFile('marks/middle-school.png'),
   },
   {
     value: 34,
     label: '高中',
+    icon: getAssetsFile('marks/high-school.png'),
   },
   {
     value: 36,
     label: '中职教育',
+    icon: getAssetsFile('marks/secondary-vocational.png'),
   },
   {
     value: 51,
     label: '特殊教育',
+    icon: getAssetsFile('marks/special-education.png'),
   },
   {
     value: 93,
     label: '教育培训机构',
+    icon: getAssetsFile('marks/training-institutions.png'),
   },
   {
     value: 98,
     label: '外籍子女学校',
+    icon: getAssetsFile('marks/foreign-children.png'),
   },
 ];
 

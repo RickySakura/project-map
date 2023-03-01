@@ -180,32 +180,8 @@ export default {
           },
         },
         tooltip: {
-          trigger: 'item',
-          backgroundColor: 'rgba(255, 255, 255, 0.95)',
-          textStyle: {
-            color: '#000',
-            fontSize: '.1rem',
-          },
-          borderColor: '#ccc',
-          borderWidth: 1,
+          valueFormatter: value => value + '个'
         },
-        graphic: [
-          // 为环形图中间添加文字
-          {
-            type: 'text',
-            style: {
-              text: '',
-              textAlign: 'center',
-            },
-          },
-          {
-            type: 'text',
-            style: {
-              text: '',
-              textAlign: 'center',
-            },
-          },
-        ],
         series: [
           {
             type: 'pie',

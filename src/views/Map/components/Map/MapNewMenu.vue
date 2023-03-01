@@ -26,7 +26,6 @@ export default {
       store.addressId = addressId;
       console.log(addressId);
     };
-
     let addressId = computed(() => store.addressId);
     return {
       addressId,

@@ -19,13 +19,13 @@ const baseOption = {
         e.data.value
       }<br>占比：${e.percent || 0}%`;
     },
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    backgroundColor: '#013c6c',
+    borderWidth: 0,
     textStyle: {
-      color: '#3B414F',
-      fontSize: 10,
+      color: '#fff',
+      fontSize: 16,
     },
-    borderColor: '#ccc',
-    borderWidth: 1,
+    appendToBody: true,
   },
   graphic: [
     // 为环形图中间添加文字
@@ -52,6 +52,10 @@ const baseOption = {
       fontSize: '.11rem',
       color: '#fff',
     },
+    itemStyle: {
+      borderWidth: 0
+    },
+    icon: 'circle'
   },
   series: [
     {

@@ -35,7 +35,7 @@ export default {
         opacity: 0,
       },
       rightToolStyle: {
-        transform: 'translateX(100%)',
+        transform: 'translateX(110%)',
       },
     };
   },
@@ -87,7 +87,7 @@ export default {
     },
     hideTools() {
       this.leftToolStyle.opacity = 0;
-      this.rightToolStyle.transform = 'translateX(100%)';
+      this.rightToolStyle.transform = 'translateX(110%)';
     },
     showTools() {
       this.leftToolStyle.opacity = 1;
@@ -102,13 +102,15 @@ export default {
 
 <style lang="less" scoped>
 .toggle-overlay-btn {
-  position: relative;
+  position: fixed;
   color: #fff;
   z-index: 9;
   background-color: red;
   font-size: 0.2rem;
-  top: 3rem;
-  left: 0.5rem;
+  // top: 1.5rem;
+  // left: 0.5rem;
+  left: 3.5rem;
+  bottom: .2rem;
   cursor: pointer;
   height: 0.5rem;
   width: 1.7rem;

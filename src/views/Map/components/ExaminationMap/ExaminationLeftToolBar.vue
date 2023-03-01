@@ -56,7 +56,6 @@
 import { useMapStore } from '@/stores/mapStore';
 import { computed, onMounted, ref, watch } from 'vue';
 import { apiGetListByExamSiteType } from '@/api/useExaminationMapRequest';
-import { ElLoading } from 'element-plus';
 import { debounce } from '@/utils/debounce';
 import { useLocalData } from '@/api/useLocalData';
 
@@ -82,16 +81,11 @@ function handleButtonClick(type) {
     isShowSchoolList.value = false;
     mapStore.examination.examSiteType = 0;
   } else {
-    let loading = ElLoading.service({
-      lock: true,
-      text: '数据加载中...',
-      background: 'rgba(0, 0, 0, 0.7)',
-    });
+
     isShowSchoolList.value = true;
     debounce(() => {
       mapStore.examination.examSiteType = type;
       updateListData(type);
-      loading.close();
     }, 400)();
   }
 }
@@ -241,6 +235,7 @@ onMounted(() => {
       resize: none;
       /*去除iOS默认样式*/
       -webkit-appearance: none;
+      appearance: none;
       /*去除点击时背景高亮样式*/
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
       color: #78d4fd;

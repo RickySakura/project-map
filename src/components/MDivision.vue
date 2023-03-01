@@ -1,5 +1,21 @@
 <template>
   <div class="m-division-container">
+    <div class="m-division-options" v-if="options.length > 0 && showOptions">
+      <div
+        class="m-division-option"
+        :class="[optionActivedIndex == index ? 'actived' : '']"
+        v-for="(option, index) in options"
+        :key="index"
+        @click="handleOptionClick(option, index)"
+      >
+        <img v-if="option.icon" :src="option.icon" alt="icon" />
+        <div class="division-option-label">
+          <slot name="label" :option="option">
+            {{ option.label }}
+          </slot>
+        </div>
+      </div>
+    </div>
     <div class="m-division-panel">
       <div
         class="m-division-content"
@@ -60,20 +76,6 @@
         </ol>
       </div>
     </div>
-    <div class="m-division-options" v-if="options.length > 0">
-      <div
-        class="m-division-option"
-        :class="[optionActivedIndex == index ? 'actived' : '']"
-        v-for="(option, index) in options"
-        :key="index"
-        @click="handleOptionClick(option, index)"
-      >
-        <img v-if="option.icon" :src="option.icon" alt="icon" />
-        <div class="division-option-label">
-          {{ option.label }}
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -81,7 +83,18 @@
 import { mapState } from 'pinia';
 import { useMapStore } from '@/stores/mapStore';
 export default {
-  name: 'MDvision',
+  /**
+   * props API:
+   * title: 列表框左上角的标题内容
+   * placeholder: 搜索框内的占位内容(如果开了搜索框的话)
+   * enableSearch: 控制是否显示搜索框
+   * options: Divison组件上方(默认是上方)的选择按钮列表
+   *    optionItem: options内的格式一般为 { label: "", icon: "", children: [] }，其中 icon 可能需要经过getAssetsFile处理, children为option对应的列表数据
+   * defaultActivedIndex: 第一次加载时默认选中的 optionItem 的索引值, 从 0 开始
+   * enableExtraList: 点击列表中的项时是否展开二级列表, 如果需要在必须在 options 中配置 children 属性, 每一项对应一个额外列表数据。
+   *    optionItem: { children: [{ label: "", icon: "", children: [ 这里是额外列表 ] }] }
+   * listData: 用于手动控制列表内容，在做网络处理时可用，此时不需要再 options 选项中配置 children
+   */
   props: {
     title: {
       type: String,
@@ -100,13 +113,25 @@ export default {
       required: true,
       default: [],
     },
-    activedIndex: {
+    defaultActivedIndex: {
       type: Number,
       default: -1,
     },
     enableExtraList: {
       type: Boolean,
       default: false,
+    },
+    listData: {
+      type: Array,
+      default: () => [],
+    },
+    showOptions: {
+      type: Boolean,
+      default: true
+    },
+    keyCode: {
+      type: Object,
+      default: { label: 'label' },
     },
   },
   data() {
@@ -121,6 +146,10 @@ export default {
     ...mapState(useMapStore, ['addressId']),
     activedList() {
       this.listItemActivedIndex = -1;
+
+      if (Array.isArray(this.listData) && this.listData.length > 0)
+        return this.listData;
+
       return this.options[this.optionActivedIndex]?.children || []; // 判空处理
     },
     listSearchResult() {
@@ -152,8 +181,8 @@ export default {
     },
   },
   mounted() {
-    if (this.activedIndex > -1 && this.options.length > 0) {
-      this.optionActivedIndex = this.activedIndex;
+    if (this.defaultActivedIndex > -1 && this.options.length > 0) {
+      this.optionActivedIndex = this.defaultActivedIndex;
     }
   },
   methods: {
@@ -206,8 +235,7 @@ export default {
 }
 .m-division-content {
   min-width: 2.7rem;
-  height: 3.58rem;
-  // height: 100%;
+  height: 5.8rem;
   overflow-x: hidden;
   overflow-y: scroll;
   border-radius: 4px;
@@ -257,8 +285,8 @@ export default {
     }
   }
   .icon {
-    width: 0.2rem;
-    height: 0.2rem;
+    width: 0.15rem;
+    height: 0.15rem;
   }
 }
 
@@ -275,7 +303,7 @@ export default {
   align-content: center;
   flex-wrap: wrap;
   height: 0.3rem;
-  font-size: 0.12rem;
+  font-size: 0.15rem;
   cursor: pointer;
   &.actived {
     background-color: #036fc8;
@@ -302,7 +330,7 @@ export default {
 }
 
 .m-division-options {
-  margin-top: 0.1rem;
+  margin: 0.1rem 0;
   background-color: #012d50;
   box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.06);
   border: 1px solid #37a8ff;
@@ -312,9 +340,7 @@ export default {
   cursor: pointer;
   display: flex;
   align-items: center;
-  font-size: 0.14rem;
-  height: 0.4rem;
-  line-height: 0.4rem;
+  height: 0.29rem;
   padding-left: 0.1rem;
 
   &.actived {
@@ -328,14 +354,15 @@ export default {
     );
   }
 
+  // 选项前的图标
   img {
-    width: 0.22rem;
-    height: 0.22rem;
+    width: 0.175rem;
+    height: 0.175rem;
     margin-right: 0.1rem;
   }
 }
 .division-option-label {
-  font-size: 0.12rem;
+  font-size: 0.134rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

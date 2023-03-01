@@ -55,7 +55,7 @@ import { useMapStore } from '@/stores/mapStore';
 import { mapState } from 'pinia';
 import {
   apiGetExaminationOverview,
-  apiGetRegionalStaticList,
+  apiGetExamSiteStaticList,
 } from '@/api/useExaminationMapRequest';
 import { useLocalData } from '@/api/useLocalData';
 
@@ -94,7 +94,7 @@ export default {
       });
       Promise.all([
         apiGetExaminationOverview(this.examSiteType, this.addressId),
-        apiGetRegionalStaticList(this.examSiteType, this.addressId),
+        apiGetExamSiteStaticList(this.examSiteType, this.addressId),
       ])
         .then(([{ result: overviewRes }, { result: staticListRes }]) => {
           this.overviewRes = overviewRes;

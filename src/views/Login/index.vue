@@ -184,31 +184,23 @@ export default {
             let params = { ...this.loginForm, checkKey: this.checkKey };
             apiHandleUserLogin(params)
               .then((res) => {
-                if (res.code === 200 || res.success) {
-                  sessionStorage.setItem('token', res.result.token);
-                  // 临时更改
-                  sessionStorage.setItem(
-                    'username',
-                    res.result.userInfo.username
-                  );
-                  // 路由跳转到主页
-                  this.$router.push({
-                    path: '/map',
-                  });
-                } else { 
-                  this.$message.error(res.message)
-                }
+                sessionStorage.setItem('token', res.result.token);
+                // 临时更改
+                sessionStorage.setItem(
+                  'username',
+                  res.result.userInfo.username
+                );
+                // 路由跳转到主页
+                this.$router.push({
+                  path: '/map',
+                });
               })
               .catch((err) => {
-                this.$message.error(err)
                 console.error(
                   '❌ ~ file: index.vue:198 ~ this.$refs[form].validate ~ err',
                   err
                 );
                 this.loginForm.captcha = '';
-                this.createCaptcha();
-              })
-              .finally(() => {
                 this.createCaptcha();
                 this.loading = false;
               });

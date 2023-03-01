@@ -5,8 +5,11 @@
         <OverviewMapLeftToolBar />
       </template>
 
-      <template #right-tool> </template>
+      <template #right-tool> 
+        <OverviewMapRightToolBar />
+      </template>
     </LayoutMapView>
+    <TheRunningDomOverlay :showWindowInfos="false"></TheRunningDomOverlay>
   </div>
 </template>
 

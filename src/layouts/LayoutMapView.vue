@@ -22,9 +22,9 @@ export default {};
 }
 .map-left-toolbar {
   // left: 1.1rem;
-  top: .13rem;
-  left: .11rem;
-  padding: .22rem;
+  top: 0.13rem;
+  left: 0.11rem;
+  padding: 0.1rem 0 0 0.22rem;
 
   // 新增地图边框
   &::before {
@@ -46,12 +46,12 @@ export default {};
 }
 .map-right-toolbar {
   // right: 0;
-  right: .11rem;
+  right: 0.11rem;
   // background-color: #052f4e;
   &::before {
     content: '';
     position: fixed;
-    top: .45rem;
+    top: 0.45rem;
     right: 0;
     width: 1.28rem;
     height: 9.51rem;

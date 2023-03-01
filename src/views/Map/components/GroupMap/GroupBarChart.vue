@@ -15,6 +15,8 @@ const baseOption = {
       //图例⽂字的样式
       color: '#fff',
     },
+    left: 'right'
+
   },
   xAxis: {
     type: 'category',
@@ -36,10 +38,10 @@ const baseOption = {
     },
   },
   grid: {
-    left: '5%',
-    right: '2%',
-    bottom: '0',
-    top: '10%',
+    // left: '5%',
+    // right: '2%',
+    // bottom: '0',
+    // top: '10%',
     containLabel: true,
   },
   yAxis: {

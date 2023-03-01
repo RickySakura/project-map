@@ -6,8 +6,9 @@ import router from './router'
 import App from './App.vue'
 import '@/utils/mediaQuery'
 import '@/utils/routeMatchMapType'
-import './style.css'
+import './style.less'
 import 'element-plus/dist/index.css'
+
 
 const app = createApp(App)
 app.use(createPinia().use(piniaPluginPersistedstate)).use(router).use(ElementPlus).use({
@@ -22,6 +23,16 @@ app.use(createPinia().use(piniaPluginPersistedstate)).use(router).use(ElementPlu
         background: "rgba(0, 0, 0, 0.7)",
       })
     }
+    // let service = ElLoading.service
+    // ElLoading.service = (options) => { 
+    //   return service({
+    //     ...options,
+    //     lock: true,
+    //     text: "数据加载中...",
+    //     background: "rgba(0, 0, 0, 0.7)",
+    //   })
+    // }
+    document.body.style.setProperty('--el-mask-color', 'rgba(0, 0, 0, 0.7)')
   }
 })
 app.mount('#app')

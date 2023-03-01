@@ -1,95 +1,160 @@
 {
   "mTitle": "广州教育资源地图",
-  "menuRes": [
+  "mapTypeList": [
     {
-      "label": "集团地图",
-      "en": "group",
-      "url": "mapMenu/group.png",
+      "label": "学校概况",
+      "icon": "mapMenu/overview.png",
       "accessUserList": [
         "admin"
+      ],
+      "route": "",
+      "aHref": "",
+      "children": [
+        {
+          "label": "概况总览",
+          "route": "overview",
+          "icon": "mapMenu/overview.png",
+          "accessUserList": [
+            "admin"
+          ]
+        },
+        {
+          "label": "办学展示",
+          "route": "running-school",
+          "icon": "mapMenu/running-school2.png",
+          "accessUserList": [
+            "admin"
+          ]
+        },
+        {
+          "label": "集团校展示",
+          "route": "group",
+          "icon": "mapMenu/group2.png",
+          "textStyle": "width: .6rem;",
+          "accessUserList": [
+            "admin"
+          ]
+        },
+        {
+          "label": "义务教育标准化学校展示",
+          "route": "compulsory",
+          "icon": "mapMenu/group2.png",
+          "itemStyle": "width: 1.56rem;",
+          "accessUserList": [
+            "admin"
+          ]
+        },
+        {
+          "label": "示范性高中展示",
+          "aHref": "#",
+          "icon": "mapMenu/group2.png",
+          "itemStyle": "width: 1.25rem;",
+          "accessUserList": [
+            "admin"
+          ]
+        },
+        {
+          "label": "职业教育学校展示",
+          "aHref": "#",
+          "icon": "mapMenu/group2.png",
+          "itemStyle": "width: 1.25rem;",
+          "accessUserList": [
+            "admin"
+          ]
+        },
+        {
+          "label": "考点展示",
+          "route": "examination",
+          "icon": "mapMenu/examination2.png",
+          "accessUserList": [
+            "admin",
+            "city",
+            "zkb440000",
+            "gdjy440000",
+            "gdsksy"
+          ]
+        }
+      ]
+    },
+    { 
+      "label": "学生概况",
+      "icon": "mapMenu/degree2.png",
+      "accessUserList": [
+        "admin"
+      ],
+      "route": "",
+      "aHref": "",
+      "children": [
+        {
+          "label": "智慧阅读展示",
+          "aHref": "#",
+          "icon": "mapMenu/overview.png",
+          "accessUserList": [
+            "admin"
+          ]
+        },
+        {
+          "label": "人工智能教学展示",
+          "aHref": "#",
+          "icon": "mapMenu/overview.png",
+          "accessUserList": [
+            "admin"
+          ]
+        },
+        {
+          "label": "阳光评价展示",
+          "aHref": "#",
+          "icon": "mapMenu/overview.png",
+          "accessUserList": [
+            "admin"
+          ]
+        },
+        {
+          "label": "科技教育展示",
+          "aHref": "#",
+          "icon": "mapMenu/overview.png",
+          "accessUserList": [
+            "admin"
+          ]
+        }
       ]
     },
     {
-      "label": "办学地图",
-      "en": "running-school",
-      "url": "mapMenu/running-school.png",
+      "label": "教师概况",
+      "icon": "mapMenu/group2.png",
       "accessUserList": [
         "admin"
+      ],
+      "route": "",
+      "aHref": "",
+      "children": [
+        {
+          "label": "继教数据展示",
+          "aHref": "#",
+          "icon": "mapMenu/overview.png",
+          "accessUserList": [
+            "admin"
+          ]
+        },
+        {
+          "label": "科研数据展示",
+          "aHref": "#",
+          "icon": "mapMenu/overview.png",
+          "accessUserList": [
+            "admin"
+          ]
+        }
       ]
     },
     {
-      "label": "疫情数据地图",
-      "en": "epidemic",
-      "url": "mapMenu/epidemic.png",
+      "label": "教育发展事业概况",
+      "icon": "mapMenu/running-school2.png",
       "accessUserList": [
         "admin"
-      ]
-    },
-    {
-      "label": "学位监测地图",
-      "en": "degree",
-      "url": "mapMenu/degree.png",
-      "accessUserList": [
-        "admin"
-      ]
-    },
-    {
-      "label": "考点地图",
-      "en": "examination",
-      "url": "mapMenu/examination.png",
-      "accessUserList": [
-        "admin",
-        "city",
-        "zkb440000",
-        "gdjy440000",
-        "gdsksy"
-      ]
-    }
-  ],
-  "menuResNew": [
-    {
-      "label": "概况总览",
-      "en": "overview",
-      "url": "mapMenu/overview.png",
-      "accessUserList": [
-        "admin"
-      ]
-    },
-    {
-      "label": "学位监测展示",
-      "en": "degree",
-      "url": "mapMenu/degree2.png",
-      "accessUserList": [
-        "admin"
-      ]
-    },
-    {
-      "label": "集团校展示",
-      "en": "group",
-      "url": "mapMenu/group2.png",
-      "accessUserList": [
-        "admin"
-      ]
-    },
-    {
-      "label": "办学展示",
-      "en": "running-school",
-      "url": "mapMenu/running-school2.png",
-      "accessUserList": [
-        "admin"
-      ]
-    },
-    {
-      "label": "考点展示",
-      "en": "examination",
-      "url": "mapMenu/examination2.png",
-      "accessUserList": [
-        "admin",
-        "city",
-        "zkb440000",
-        "gdjy440000",
-        "gdsksy"
-      ]
+      ],
+      "route": "",
+      "aHref": "#",
+      "children": null
     }
   ],
   "mapRes": {
@@ -14637,17 +14702,17 @@
           23.26152,
           113.521604
         ],
+        "zoom": 8,
+        "minZoom": 8,
+        "maxZoom": 16,
         "sw": [
-          24.43213,
+          29.43213,
           115.28474
         ],
         "ne": [
           22.23316,
           111.59882
-        ],
-        "zoom": 8,
-        "minZoom": 8,
-        "maxZoom": 16
+        ]
       },
       {
         "addressId": 5,

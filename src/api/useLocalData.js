@@ -8,21 +8,23 @@ import axios from 'axios'
  * @param {string | string[]} keys 需要获取的key或key值数组,如果不传则获取整个数据对象
  * @returns {*} 获取的数据结果
  */
-export function useLocalData(keys) {
+export function useLocalData(keys, handler) {
+  let result = {}
+
   if (!keys) {
-    return mapInfos
+    result = mapInfos
   }
   if (typeof keys === 'string') {
-    return mapInfos[keys]
+    result =  mapInfos[keys]
   }
   if (Array.isArray(keys)) {
-    let result = {}
     keys.forEach(key => {
       result[key] = mapInfos[key]
     })
     return result
   }
-  return {
-    errorMessage: '类型错误: 参数keys的类型必须是string或string[]！'
-  }
+  // if (typeof handler === 'function') { 
+
+  // }
+  return result
 }

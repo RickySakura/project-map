@@ -2,7 +2,7 @@
   <div class="left-toolbar-container">
     <MDivision
       :options="options"
-      :actived-index="activedIndex"
+      :default-actived-index="activedIndex"
       enable-extra-list
       @optionClick="settleOptionClick"
       @listItemClick="settleListItmeClick"

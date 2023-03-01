@@ -32,6 +32,11 @@ export default {
       name: 'examination',
       path: 'examination',
       component: () => import('@/views/Map/pages/ExaminationMap.vue')
-    }
+    },
+    {
+      name: 'compulsory',
+      path: 'compulsory',
+      component: () => import('@/views/Map/pages/CompulsoryMap.vue')
+    },
   ]
 }
